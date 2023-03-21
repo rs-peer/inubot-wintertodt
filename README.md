@@ -9,4 +9,4 @@ A wintertodt script written for the [Inubot client](https://inubot.com/)
 
 
 ## License
-[MIT License](LICENSE)
+[License](LICENSE)
