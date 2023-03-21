@@ -7,7 +7,7 @@ public abstract class GameTask extends Task {
 
   private final Domain domain;
 
-  public GameTask(Domain domain) {
+  protected GameTask(Domain domain) {
     this.domain = domain;
   }
 
@@ -16,5 +16,5 @@ public abstract class GameTask extends Task {
     return domain.isInGame() && play();
   }
 
-  public abstract boolean play();
+  protected abstract boolean play();
 }

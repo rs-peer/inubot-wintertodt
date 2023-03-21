@@ -3,9 +3,9 @@ package org.rspeer.scripts.wintertodt.domain;
 import com.google.inject.Singleton;
 import jag.script.RSScriptEvent;
 import org.rspeer.event.Subscribe;
+import org.rspeer.game.Vars;
 import org.rspeer.game.adapter.scene.EffectObject;
-import org.rspeer.game.event.ClientScriptEvent;
-import org.rspeer.game.event.EffectObjectSpawnEvent;
+import org.rspeer.game.event.*;
 import org.rspeer.game.scene.Players;
 import org.rspeer.game.script.event.ScriptConfigEvent;
 import org.rspeer.game.script.meta.ScriptConfig;
@@ -18,9 +18,11 @@ public class Domain {
   private boolean fletch;
   private int wintertodtEnergy;
   private Gang gang = Gang.WEST;
+  private int tick = 0;
+  private int activeTick = 0;
 
   @Subscribe
-  public void initialize(ScriptConfigEvent event) {
+  public void notify(ScriptConfigEvent event) {
     ScriptConfig config = event.getSource();
     fletch = config.getBoolean("Fletch");
     gang = config.get("Side");
@@ -43,7 +45,21 @@ public class Domain {
     //As illustrated above, the wintertodt energy % is internally a value between 0 and 3500.
     //We interpolate this to get a 1-100 value
     int value = (int) args[2];
-    wintertodtEnergy = (int) (value / 3500.0 * 100.0);
+    wintertodtEnergy = (int) ((value / 3500.0 * 100.0) + 0.5);
+  }
+
+  @Subscribe
+  public void notify(TickEvent event) {
+    tick++;
+  }
+
+  @Subscribe
+  public void notify(AnimationEvent event) {
+    if (!event.getSource().equals(Players.self())) {
+      return;
+    }
+
+    this.activeTick = tick;
   }
 
   @Subscribe
@@ -60,11 +76,26 @@ public class Domain {
     return wintertodtEnergy;
   }
 
+  /**
+   * @return The number of server ticks until wintertodt respawns
+   */
+  public int getWintertodtTimer() {
+    return Vars.get(Vars.Type.VARBIT, Constant.WINTERTODT_TIMER_VARBIT_ID);
+  }
+
   public Gang getGang() {
     return gang;
   }
 
+  public boolean isIdle(int ticksThreshold) {
+    return tick - activeTick >= ticksThreshold;
+  }
+
   public boolean isInGame() {
     return Players.self().getPosition().getRegionId() == Constant.WINTERTODT_REGION_ID;
+  }
+
+  public boolean isWaiting() {
+    return getWintertodtEnergy() == 0 && getWintertodtTimer() > 0;
   }
 }

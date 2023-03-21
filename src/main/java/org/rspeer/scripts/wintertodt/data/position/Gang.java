@@ -35,10 +35,10 @@ public enum Gang {
   private final Position step;
 
   /**
-   * @param name The name as expected to display in the UI. I have to do this because the obfuscator strips constant names
+   * @param name    The name as expected to display in the UI. I have to do this because the obfuscator strips constant names
    * @param brazier Position of the brazier object
-   * @param roots Position of the roots object
-   * @param step Position in front of the brazier
+   * @param roots   Position of the roots object
+   * @param step    Position in front of the brazier
    */
   Gang(String name, Position brazier, Position roots, Position step) {
     this.name = name;

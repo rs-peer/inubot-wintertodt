@@ -20,4 +20,9 @@ public interface Constant {
    * The ID of the wintertodt region. We use this to determine if we're inside the wintertodt minigame area.
    */
   int WINTERTODT_REGION_ID = 6462;
+
+  /**
+   * <a href="https://github.com/Joshua-F/cs2-scripts/blob/master/scripts/%5Bproc,wint_timer_resynch%5D.cs2">See</a>
+   */
+  int WINTERTODT_TIMER_VARBIT_ID = 7980;
 }

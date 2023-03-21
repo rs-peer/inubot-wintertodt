@@ -13,7 +13,8 @@ import org.rspeer.scripts.wintertodt.task.generic.DialogTask;
 import org.rspeer.scripts.wintertodt.task.generic.RunTask;
 import org.rspeer.scripts.wintertodt.task.prepare.EnterTask;
 
-import java.util.function.*;
+import java.util.function.BooleanSupplier;
+import java.util.function.IntSupplier;
 
 @ScriptMeta(
     name = "Wintertodt KILLA",
@@ -31,6 +32,9 @@ public class Wintertodt extends TaskScript {
 
   @PaintBinding("In Game")
   private final BooleanSupplier game = () -> getDomain().isInGame();
+
+  @PaintBinding("Timer")
+  private final IntSupplier timer = () -> getDomain().getWintertodtTimer();
 
   private Domain getDomain() {
     return injector.getInstance(Domain.class);
