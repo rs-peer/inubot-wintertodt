@@ -1,6 +1,6 @@
 package org.rspeer.scripts.wintertodt.data.action;
 
-import org.rspeer.scripts.wintertodt.domain.Domain;
+import org.rspeer.scripts.wintertodt.domain.Timers;
 
 /**
  * Enum containing possible wintertodt actions and their durations in ticks
@@ -24,7 +24,7 @@ public enum Action {
     return animation;
   }
 
-  public boolean isActive(Domain domain) {
-    return !domain.timers().isIdle(duration);
+  public boolean isActive(Timers timers) {
+    return !timers.isIdle(duration);
   }
 }
