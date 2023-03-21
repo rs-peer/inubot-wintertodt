@@ -7,7 +7,7 @@ import org.rspeer.scripts.wintertodt.domain.Domain;
 public enum Crate {
 
   HAMMER(new Position(1626, 3980)),
-  KNIFE(new Position(1634, 3980), Domain::isFletch),
+  KNIFE(new Position(1634, 3980), domain -> domain.getConfig().isFletch()),
   TINDERBOX(new Position(1634, 3984));
 
   private final Position position;

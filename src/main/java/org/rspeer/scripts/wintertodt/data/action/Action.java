@@ -25,6 +25,6 @@ public enum Action {
   }
 
   public boolean isActive(Domain domain) {
-    return !domain.isIdle(duration);
+    return !domain.getTimers().isIdle(duration);
   }
 }

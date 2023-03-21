@@ -5,7 +5,8 @@ A wintertodt script written for the [Inubot client](https://inubot.com/)
 
 ## Features
 
-* None LOL
+* Will steal your password (probably)
+* TBD
 
 
 ## License
