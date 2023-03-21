@@ -5,7 +5,7 @@ import org.rspeer.game.adapter.scene.SceneObject;
 import org.rspeer.game.scene.SceneObjects;
 import org.rspeer.game.script.Task;
 import org.rspeer.game.script.TaskDescriptor;
-import org.rspeer.scripts.wintertodt.data.position.Province;
+import org.rspeer.scripts.wintertodt.api.Province;
 import org.rspeer.scripts.wintertodt.domain.Domain;
 
 @TaskDescriptor(name = "Starting a game!")

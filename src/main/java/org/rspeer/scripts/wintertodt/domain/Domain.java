@@ -9,17 +9,11 @@ import org.rspeer.game.scene.Players;
 import org.rspeer.game.script.event.ScriptConfigEvent;
 
 @Singleton
-public class Domain {
-
-  private final Config config;
-  private final Boss boss;
-  private final Timers timers;
+public record Domain(Config config, Boss boss, Timers timers) {
 
   @Inject
-  public Domain(Config config, Boss boss, Timers timers) {
-    this.config = config;
-    this.boss = boss;
-    this.timers = timers;
+  public Domain {
+
   }
 
   @Subscribe
@@ -48,17 +42,5 @@ public class Domain {
   public void notify(EffectObjectSpawnEvent event) {
     EffectObject fx = event.getSource();
     //We will be using this to detect snowfall.
-  }
-
-  public Config getConfig() {
-    return config;
-  }
-
-  public Boss getBoss() {
-    return boss;
-  }
-
-  public Timers getTimers() {
-    return timers;
   }
 }

@@ -1,7 +1,7 @@
 package org.rspeer.scripts.wintertodt.task.game;
 
 import org.rspeer.game.script.Task;
-import org.rspeer.scripts.wintertodt.data.position.Province;
+import org.rspeer.scripts.wintertodt.api.Province;
 import org.rspeer.scripts.wintertodt.domain.Domain;
 
 public abstract class GameTask extends Task {

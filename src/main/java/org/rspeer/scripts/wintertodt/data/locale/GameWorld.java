@@ -23,7 +23,7 @@ public enum GameWorld {
       }
     }
 
-    throw new IllegalArgumentException();
+    throw new IllegalAccessError();
   }
 
   public int getId() {
