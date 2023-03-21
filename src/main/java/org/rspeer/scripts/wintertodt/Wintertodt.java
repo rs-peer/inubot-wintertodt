@@ -11,6 +11,7 @@ import org.rspeer.game.script.meta.paint.PaintScheme;
 import org.rspeer.scripts.wintertodt.domain.Domain;
 import org.rspeer.scripts.wintertodt.task.generic.DialogTask;
 import org.rspeer.scripts.wintertodt.task.generic.RunTask;
+import org.rspeer.scripts.wintertodt.task.prepare.EnterTask;
 
 import java.util.function.*;
 
@@ -49,7 +50,8 @@ public class Wintertodt extends TaskScript {
   protected Class<? extends Task>[] tasks() {
     return ArrayUtils.getTypeSafeArray(
         DialogTask.class,
-        RunTask.class
+        RunTask.class,
+        EnterTask.class
     );
   }
 }

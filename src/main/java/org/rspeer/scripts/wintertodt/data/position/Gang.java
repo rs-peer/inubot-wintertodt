@@ -1,4 +1,4 @@
-package org.rspeer.scripts.wintertodt.data;
+package org.rspeer.scripts.wintertodt.data.position;
 
 import org.rspeer.game.position.Position;
 

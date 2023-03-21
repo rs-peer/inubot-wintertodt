@@ -10,7 +10,7 @@ import org.rspeer.game.scene.Players;
 import org.rspeer.game.script.event.ScriptConfigEvent;
 import org.rspeer.game.script.meta.ScriptConfig;
 import org.rspeer.scripts.wintertodt.data.Constant;
-import org.rspeer.scripts.wintertodt.data.Gang;
+import org.rspeer.scripts.wintertodt.data.position.Gang;
 
 @Singleton
 public class Domain {
