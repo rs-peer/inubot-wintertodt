@@ -21,7 +21,7 @@ public class Timers {
 
   void message(String text) {
     //This message will interrupt the player animation
-    if (text.contains("the cold of the wintertodt")) {
+    if (text.contains("congratulations") || text.contains("the cold of the wintertodt")) {
       animation = 0;
     }
   }
