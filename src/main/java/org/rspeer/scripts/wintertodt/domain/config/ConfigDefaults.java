@@ -1,7 +1,7 @@
 package org.rspeer.scripts.wintertodt.domain.config;
 
-import org.rspeer.scripts.wintertodt.data.locale.GameWorld;
-import org.rspeer.scripts.wintertodt.data.position.Gang;
+import org.rspeer.scripts.wintertodt.data.GameWorld;
+import org.rspeer.scripts.wintertodt.data.Gang;
 
 public interface ConfigDefaults {
 

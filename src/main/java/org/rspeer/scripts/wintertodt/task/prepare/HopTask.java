@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import org.rspeer.game.component.Worlds;
 import org.rspeer.game.script.Task;
 import org.rspeer.game.script.TaskDescriptor;
-import org.rspeer.scripts.wintertodt.data.locale.GameWorld;
+import org.rspeer.scripts.wintertodt.data.GameWorld;
 import org.rspeer.scripts.wintertodt.domain.config.Config;
 
 @TaskDescriptor(name = "Hopping to Wintertodt world!")

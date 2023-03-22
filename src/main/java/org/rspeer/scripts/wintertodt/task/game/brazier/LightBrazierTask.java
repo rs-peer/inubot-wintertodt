@@ -8,8 +8,8 @@ import org.rspeer.game.position.Position;
 import org.rspeer.game.scene.Players;
 import org.rspeer.game.script.TaskDescriptor;
 import org.rspeer.scripts.wintertodt.api.Province;
-import org.rspeer.scripts.wintertodt.data.action.Action;
-import org.rspeer.scripts.wintertodt.data.position.Gang;
+import org.rspeer.scripts.wintertodt.data.Action;
+import org.rspeer.scripts.wintertodt.data.Gang;
 import org.rspeer.scripts.wintertodt.domain.Domain;
 import org.rspeer.scripts.wintertodt.task.game.ActionTask;
 

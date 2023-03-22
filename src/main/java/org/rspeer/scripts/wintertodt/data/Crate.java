@@ -1,4 +1,4 @@
-package org.rspeer.scripts.wintertodt.data.position;
+package org.rspeer.scripts.wintertodt.data;
 
 import org.rspeer.game.position.Position;
 import org.rspeer.scripts.wintertodt.domain.config.Config;

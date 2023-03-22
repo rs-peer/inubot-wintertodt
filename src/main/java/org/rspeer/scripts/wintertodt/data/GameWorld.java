@@ -1,4 +1,4 @@
-package org.rspeer.scripts.wintertodt.data.locale;
+package org.rspeer.scripts.wintertodt.data;
 
 import org.rspeer.game.adapter.component.World;
 

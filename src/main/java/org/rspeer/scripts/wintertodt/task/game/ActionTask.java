@@ -1,6 +1,6 @@
 package org.rspeer.scripts.wintertodt.task.game;
 
-import org.rspeer.scripts.wintertodt.data.action.Action;
+import org.rspeer.scripts.wintertodt.data.Action;
 import org.rspeer.scripts.wintertodt.domain.Domain;
 
 public abstract class ActionTask extends GameTask {

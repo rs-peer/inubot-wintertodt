@@ -3,9 +3,9 @@ package org.rspeer.scripts.wintertodt.domain.config;
 import com.google.inject.Singleton;
 import org.rspeer.game.adapter.component.inventory.Inventory;
 import org.rspeer.game.script.meta.ScriptConfig;
-import org.rspeer.scripts.wintertodt.data.item.WintertodtItem;
-import org.rspeer.scripts.wintertodt.data.locale.GameWorld;
-import org.rspeer.scripts.wintertodt.data.position.Gang;
+import org.rspeer.scripts.wintertodt.data.WintertodtItem;
+import org.rspeer.scripts.wintertodt.data.GameWorld;
+import org.rspeer.scripts.wintertodt.data.Gang;
 
 @Singleton
 public class Config {

@@ -1,4 +1,4 @@
-package org.rspeer.scripts.wintertodt.data.action;
+package org.rspeer.scripts.wintertodt.data;
 
 import org.rspeer.scripts.wintertodt.domain.Domain;
 
