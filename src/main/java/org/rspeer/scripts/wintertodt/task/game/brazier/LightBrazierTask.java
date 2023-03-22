@@ -11,6 +11,7 @@ import org.rspeer.game.scene.Players;
 import org.rspeer.game.script.TaskDescriptor;
 import org.rspeer.scripts.wintertodt.api.Province;
 import org.rspeer.scripts.wintertodt.data.action.Action;
+import org.rspeer.scripts.wintertodt.data.position.Gang;
 import org.rspeer.scripts.wintertodt.domain.Domain;
 import org.rspeer.scripts.wintertodt.task.game.ActionTask;
 
@@ -42,18 +43,18 @@ public class LightBrazierTask extends ActionTask {
       return false;
     }
 
-    Position brazier = domain.getConfig().getGang().getBrazier();
-    if (isSpawning(brazier)) {
+    Gang gang = domain.getConfig().getGang();
+    if (isSpawning(gang.getStep())) {
       //Walk to the brazier as the game is starting
-      if (self.isMoving() || self.distance(brazier) <= 2) {
+      if (self.isMoving() || gang.getBrazier().distance() <= 2) {
         return false;
       }
 
-      Movement.walkTowards(brazier);
+      Movement.walkTowards(gang.getStep());
       return true;
     }
 
-    SceneObject object = Province.findBrazier(brazier, "Light");
+    SceneObject object = Province.findBrazier(gang.getBrazier(), "Light");
     if (object != null && object.interact("Light")) {
       //TODO this sleep will not work if the player has 200m firemaking experience.
       //A solution is to wait until I add SkillEvent to the bot, and use sleep(duration) instead of sleepUntil

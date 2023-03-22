@@ -19,11 +19,9 @@ import org.rspeer.scripts.wintertodt.task.generic.DialogTask;
 import org.rspeer.scripts.wintertodt.task.generic.RunTask;
 import org.rspeer.scripts.wintertodt.task.prepare.*;
 
-import java.util.function.BooleanSupplier;
-
 @ScriptMeta(
-    name = "Wintertodt KILLA",
-    developer = "Doga",
+    name = "Wintertodt K1LLA",
+    developer = "Doga, Tupac, Kanye",
     paint = PaintScheme.class,
     regions = -3
 )
@@ -34,9 +32,6 @@ public class Wintertodt extends TaskScript {
 
   @PaintBinding("Experience")
   private final Skill[] skills = {Skill.FIREMAKING, Skill.WOODCUTTING, Skill.FLETCHING};
-
-  @PaintBinding("State")
-  private final BooleanSupplier state = () -> getDomain().getState().shouldChop();
 
   private Domain getDomain() {
     return injector.getInstance(Domain.class);
