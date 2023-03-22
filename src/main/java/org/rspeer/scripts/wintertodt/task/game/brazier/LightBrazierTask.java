@@ -33,7 +33,7 @@ public class LightBrazierTask extends ActionTask {
   @Override
   protected boolean play() {
     Player self = Players.self();
-    if (self == null || self.isAnimating()) {
+    if (self == null) {
       return false;
     }
 
@@ -50,7 +50,7 @@ public class LightBrazierTask extends ActionTask {
 
     //TODO the above code will walk there but not light due to the below condition
     //need to fix it to light at the start of every game
-    if (domain.getState().shouldChop()) {
+    if (domain.getState().shouldChop() && domain.getBoss().getEnergy() < 99) {
       return false;
     }
 

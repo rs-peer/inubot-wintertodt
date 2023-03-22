@@ -30,7 +30,7 @@ public class BurnTask extends ActionTask {
     }
 
     Player self = Players.self();
-    if (self == null || self.isAnimating()) {
+    if (self == null) {
       return false;
     }
 
