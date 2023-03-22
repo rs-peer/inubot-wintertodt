@@ -36,14 +36,14 @@ public class BurnTask extends ActionTask {
 
     //TODO fletch 1 log while moving between the logs and brazier.
     SceneObject brazier = Province.findBrazier(domain.getConfig().getGang().getBrazier(), "Feed");
-    if (brazier != null) {
-      if (brazier.distance() <= 2 && getAction().isActive(domain)) {
-        return true;
-      }
-
-      return brazier.interact("Feed");
+    if (brazier == null) {
+      return false;
     }
 
-    return false;
+    if (brazier.distance() <= 2 && getAction().isActive(domain)) {
+      return true;
+    }
+
+    return brazier.interact("Feed");
   }
 }

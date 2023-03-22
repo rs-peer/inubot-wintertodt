@@ -35,14 +35,14 @@ public class RepairTask extends ActionTask {
     }
 
     SceneObject brazier = Province.findBrazier(domain.getConfig().getGang().getBrazier(), "Fix");
-    if (brazier != null) {
-      if (brazier.distance() <= 2 && getAction().isActive(domain)) {
-        return true;
-      }
-
-      return brazier.interact("Fix");
+    if (brazier == null) {
+      return false;
     }
 
-    return false;
+    if (brazier.distance() <= 2 && getAction().isActive(domain)) {
+      return true;
+    }
+
+    return brazier.interact("Fix");
   }
 }
