@@ -7,6 +7,8 @@ import org.rspeer.scripts.wintertodt.domain.Timers;
  */
 public enum Action {
 
+  //TODO Add repair brazier action
+
   FLETCH(1248, 3),
   CHOP(2846, 4),
   BURN(832, 3),
@@ -22,6 +24,10 @@ public enum Action {
 
   public int getAnimation() {
     return animation;
+  }
+
+  public int getDuration() {
+    return duration;
   }
 
   public boolean isActive(Timers timers) {

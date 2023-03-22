@@ -48,6 +48,8 @@ public class BankTask extends Task {
     }
 
     Bank bank = Inventory.bank();
+    bank.depositAll(iq -> iq.names("Supply crate").results());
+
     for (WintertodtItem item : missing) {
       Log.info("Withdrawing " + item.getName());
       bank.withdraw(item.getName(), 1);

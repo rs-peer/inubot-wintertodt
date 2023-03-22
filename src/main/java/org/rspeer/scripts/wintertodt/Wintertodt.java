@@ -10,7 +10,11 @@ import org.rspeer.game.script.meta.ScriptMeta;
 import org.rspeer.game.script.meta.paint.PaintBinding;
 import org.rspeer.game.script.meta.paint.PaintScheme;
 import org.rspeer.scripts.wintertodt.domain.Domain;
-import org.rspeer.scripts.wintertodt.task.game.EatTask;
+import org.rspeer.scripts.wintertodt.task.game.FoodTask;
+import org.rspeer.scripts.wintertodt.task.game.WaitingAreaTask;
+import org.rspeer.scripts.wintertodt.task.game.brazier.BurnTask;
+import org.rspeer.scripts.wintertodt.task.game.brazier.LightBrazierTask;
+import org.rspeer.scripts.wintertodt.task.game.roots.ChopTask;
 import org.rspeer.scripts.wintertodt.task.generic.DialogTask;
 import org.rspeer.scripts.wintertodt.task.generic.RunTask;
 import org.rspeer.scripts.wintertodt.task.prepare.*;
@@ -29,7 +33,7 @@ public class Wintertodt extends TaskScript {
   private final StopWatch runtime = StopWatch.start();
 
   @PaintBinding("Experience")
-  private final Skill[] skills = {Skill.FIREMAKING, Skill.FLETCHING};
+  private final Skill[] skills = {Skill.FIREMAKING, Skill.WOODCUTTING, Skill.FLETCHING};
 
   @PaintBinding("State")
   private final BooleanSupplier state = () -> getDomain().getState().shouldChop();
@@ -57,7 +61,11 @@ public class Wintertodt extends TaskScript {
         EnterTask.class,
         BankTask.class,
         ExitTask.class,
-        EatTask.class
+        FoodTask.class,
+        WaitingAreaTask.class,
+        LightBrazierTask.class,
+        BurnTask.class,
+        ChopTask.class
     );
   }
 }

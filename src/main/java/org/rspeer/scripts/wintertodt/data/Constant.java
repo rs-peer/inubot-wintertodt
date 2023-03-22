@@ -1,6 +1,8 @@
 package org.rspeer.scripts.wintertodt.data;
 
 import org.rspeer.commons.math.Range;
+import org.rspeer.game.position.Position;
+import org.rspeer.game.position.area.Area;
 
 public interface Constant {
 
@@ -40,4 +42,9 @@ public interface Constant {
    * Perhaps this should be in Config and user defined?
    */
   Range EAT_FOOD_AT = Range.of(55, 65);
+
+  Area WAITING_AREA = Area.rectangular(
+      new Position(1628, 3984),
+      new Position(1632, 3982)
+  );
 }

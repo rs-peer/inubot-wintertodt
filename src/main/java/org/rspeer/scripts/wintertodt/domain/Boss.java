@@ -17,12 +17,12 @@ public class Boss {
   /**
    * @return The number of server ticks until the boss respawns
    */
-  public int getTimer() {
+  public int getRespawnTimer() {
     return Vars.get(Vars.Type.VARBIT, Constant.WINTERTODT_TIMER_VARBIT_ID);
   }
 
   public boolean isRespawning() {
-    return getEnergy() == 0 && getTimer() > 0;
+    return getEnergy() == 0 && getRespawnTimer() > 0;
   }
 
   public void updateEnergy(RSScriptEvent src) {
