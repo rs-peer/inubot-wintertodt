@@ -26,6 +26,14 @@ public class State {
       return;
     }
 
+    //Time is a limiting factor for reaching our (next) points threshold, so we force burn
+    int remaining = Constant.POINTS_THRESHOLD - (boss.getPoints() % Constant.POINTS_THRESHOLD);
+    if (boss.getEnergy() < 25 && getStoredPoints(inv) >= remaining) {
+      Log.info("Force burning due to time limiting factor");
+      chop = false;
+      return;
+    }
+
     if (!inv.contains(iq -> iq.names(Constant.KINDLING, Constant.ROOT).results())) {
       chop = true;
       return;
@@ -33,14 +41,7 @@ public class State {
 
     //Just force burn
     if (boss.getEnergy() < 10) {
-      chop = false;
-      return;
-    }
-
-    //Time is a limiting factor for reaching our (next) points threshold, so we force burn
-    int remaining = Constant.POINTS_THRESHOLD - (boss.getPoints() % Constant.POINTS_THRESHOLD);
-    if (boss.getEnergy() < 25 && getStoredPoints(inv) >= remaining) {
-      Log.info("Force burning due to time limiting factor");
+      Log.info("Boss dying, forcing burn cycle");
       chop = false;
     }
   }
