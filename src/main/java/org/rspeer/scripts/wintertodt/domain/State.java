@@ -34,7 +34,7 @@ public class State {
       return;
     }
 
-    if (!inv.contains(iq -> iq.names(Constant.KINDLING, Constant.ROOT).results())) {
+    if (!inv.contains(Constant.BURNABLE)) {
       chop = true;
       return;
     }

@@ -7,13 +7,11 @@ import org.rspeer.scripts.wintertodt.domain.Domain;
  */
 public enum Action {
 
-  //TODO Add repair brazier action
-
   REPAIR(3676, 3),
   FLETCH(1248, 3),
   CHOP(2846, 4),
   BURN(832, 4),
-  LIGHT(733, 4); //might be 4 need to verify
+  LIGHT(733, 4);
 
   private final int animation;
   private final int duration;

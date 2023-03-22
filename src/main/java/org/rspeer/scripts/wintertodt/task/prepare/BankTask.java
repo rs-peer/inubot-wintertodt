@@ -7,6 +7,7 @@ import org.rspeer.game.effect.Health;
 import org.rspeer.game.script.Task;
 import org.rspeer.game.script.TaskDescriptor;
 import org.rspeer.scripts.wintertodt.api.Province;
+import org.rspeer.scripts.wintertodt.data.Constant;
 import org.rspeer.scripts.wintertodt.data.WintertodtItem;
 import org.rspeer.scripts.wintertodt.domain.config.Config;
 
@@ -56,13 +57,14 @@ public class BankTask extends Task {
 
     Bank bank = Inventory.bank();
     bank.depositAllExcept(iq -> iq.nameContains(exceptions).results());
+    bank.depositAll(iq -> iq.noted().results()); //not sure why the above is ignoring these TODO
 
     for (WintertodtItem item : missing) {
       bank.withdraw(item.getName(), 1);
     }
 
     //We count actions rather than getFoodId from config because we may have leftover cake slices.
-    int remainingFoodAmount = Inventory.backpack().getCount(iq -> iq.actions("Eat", "Drink").results());
+    int remainingFoodAmount = Inventory.backpack().getCount(Constant.FOOD);
     int foodRequired = config.getFoodAmount() - remainingFoodAmount;
     if (Health.getPercent() < 35) {
       foodRequired += 2;

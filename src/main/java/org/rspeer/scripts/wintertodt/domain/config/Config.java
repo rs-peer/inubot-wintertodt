@@ -3,9 +3,7 @@ package org.rspeer.scripts.wintertodt.domain.config;
 import com.google.inject.Singleton;
 import org.rspeer.game.adapter.component.inventory.Inventory;
 import org.rspeer.game.script.meta.ScriptConfig;
-import org.rspeer.scripts.wintertodt.data.WintertodtItem;
-import org.rspeer.scripts.wintertodt.data.GameWorld;
-import org.rspeer.scripts.wintertodt.data.Gang;
+import org.rspeer.scripts.wintertodt.data.*;
 
 @Singleton
 public class Config {
@@ -83,6 +81,6 @@ public class Config {
       }
     }
 
-    return Inventory.backpack().getCount(iq -> iq.actions("Eat", "Drink").results()) >= minimumFoodAmount;
+    return Inventory.backpack().getCount(Constant.FOOD) >= minimumFoodAmount;
   }
 }

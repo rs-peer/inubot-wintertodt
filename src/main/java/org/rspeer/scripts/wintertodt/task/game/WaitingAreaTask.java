@@ -30,7 +30,7 @@ public class WaitingAreaTask extends GameTask {
 
     //TODO if enough time and points are low just reset and bank...
 
-    Item food = Inventory.backpack().query().actions("Eat", "Drink").results().first();
+    Item food = Constant.FOOD.apply(Inventory.backpack().query()).first();
     if (food != null) {
       return false;
     }

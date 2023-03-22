@@ -24,7 +24,7 @@ public class FoodTask extends GameTask {
       return false;
     }
 
-    Item food = Inventory.backpack().query().actions("Eat", "Drink").results().first();
+    Item food = Constant.FOOD.apply(Inventory.backpack().query()).first();
     if (food == null || Health.getPercent() > tolerance) {
       return false;
     }
