@@ -23,7 +23,6 @@ A wintertodt script written for the [Inubot client](https://inubot.com/)
 * Fletch 1 log while walking between the roots and brazier
 * Heal pyromancer or switch sides
 * Take required items from crates if not in bank, inventory or equipment
-* If not enough points and time then burn once enough logs for 500 pts instead of chopping full inv
 * Solo mode
 * Adding idle tasks (between spawns - bankstanding skills, fletching darts/bolts etc)
 

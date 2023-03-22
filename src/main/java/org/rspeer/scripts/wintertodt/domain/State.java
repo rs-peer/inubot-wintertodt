@@ -48,7 +48,7 @@ public class State {
   private int getStoredPoints(Inventory inv) {
     int roots = inv.getCount(iq -> iq.names(Constant.ROOT).results());
     int kindlings = inv.getCount(iq -> iq.names(Constant.KINDLING).results());
-    return (roots * 10) * (kindlings * 25);
+    return (roots * 10) + (kindlings * 25);
   }
 
   public boolean shouldChop() {
