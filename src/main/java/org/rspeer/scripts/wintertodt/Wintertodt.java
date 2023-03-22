@@ -9,9 +9,10 @@ import org.rspeer.game.script.meta.ScriptMeta;
 import org.rspeer.game.script.meta.paint.PaintBinding;
 import org.rspeer.game.script.meta.paint.PaintScheme;
 import org.rspeer.scripts.wintertodt.domain.Domain;
+import org.rspeer.scripts.wintertodt.task.game.EatTask;
 import org.rspeer.scripts.wintertodt.task.generic.DialogTask;
 import org.rspeer.scripts.wintertodt.task.generic.RunTask;
-import org.rspeer.scripts.wintertodt.task.prepare.EnterTask;
+import org.rspeer.scripts.wintertodt.task.prepare.*;
 
 @ScriptMeta(
     name = "Wintertodt KILLA",
@@ -41,9 +42,13 @@ public class Wintertodt extends TaskScript {
   @Override
   protected Class<? extends Task>[] tasks() {
     return ArrayUtils.getTypeSafeArray(
+        HopTask.class,
         DialogTask.class,
         RunTask.class,
-        EnterTask.class
+        EnterTask.class,
+        BankTask.class,
+        ExitTask.class,
+        EatTask.class
     );
   }
 }
