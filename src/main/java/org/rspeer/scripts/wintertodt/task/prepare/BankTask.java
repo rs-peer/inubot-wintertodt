@@ -47,7 +47,10 @@ public class BankTask extends Task {
       }
 
       Bank.open();
-      sleepUntil(Bank::isOpen, 4);
+
+      //TODO this sleep is bad. When leaving the wintertodt area, there's a tick delay where the player cannot interact with anything
+      //So the bot will click the bank and nothing will happen, this sleep will still execute. I've made it smaller for now
+      sleepUntil(Bank::isOpen, 3);
       return true;
     }
 
