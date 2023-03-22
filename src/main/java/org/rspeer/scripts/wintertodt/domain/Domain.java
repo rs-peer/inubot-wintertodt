@@ -13,12 +13,14 @@ public class Domain {
 
   private final Config config;
   private final Boss boss;
+  private final State state;
   private final Timers timers;
 
   @Inject
-  public Domain(Config config, Boss boss, Timers timers) {
+  public Domain(Config config, Boss boss, State state, Timers timers) {
     this.config = config;
     this.boss = boss;
+    this.state = state;
     this.timers = timers;
   }
 
@@ -29,12 +31,22 @@ public class Domain {
 
   @Subscribe
   public void notify(ClientScriptEvent event) {
-    boss.update(event.getSource());
+    boss.updateEnergy(event.getSource());
   }
 
   @Subscribe
   public void notify(TickEvent event) {
     timers.tick();
+    state.tick();
+  }
+
+  @Subscribe
+  public void notify(ChatMessageEvent event) {
+    ChatMessageEvent.Type type = event.getType();
+    if (type == ChatMessageEvent.Type.FILTERED || type == ChatMessageEvent.Type.GAME) {
+      String text = event.getContents().toLowerCase();
+      timers.message(text);
+    }
   }
 
   @Subscribe
@@ -56,6 +68,10 @@ public class Domain {
 
   public Boss getBoss() {
     return boss;
+  }
+
+  public State getState() {
+    return state;
   }
 
   public Timers getTimers() {

@@ -3,6 +3,7 @@ package org.rspeer.scripts.wintertodt;
 import org.rspeer.commons.ArrayUtils;
 import org.rspeer.commons.StopWatch;
 import org.rspeer.game.Game;
+import org.rspeer.game.component.tdi.Skill;
 import org.rspeer.game.script.Task;
 import org.rspeer.game.script.TaskScript;
 import org.rspeer.game.script.meta.ScriptMeta;
@@ -14,6 +15,8 @@ import org.rspeer.scripts.wintertodt.task.generic.DialogTask;
 import org.rspeer.scripts.wintertodt.task.generic.RunTask;
 import org.rspeer.scripts.wintertodt.task.prepare.*;
 
+import java.util.function.BooleanSupplier;
+
 @ScriptMeta(
     name = "Wintertodt KILLA",
     developer = "Doga",
@@ -24,6 +27,12 @@ public class Wintertodt extends TaskScript {
 
   @PaintBinding("Runtime")
   private final StopWatch runtime = StopWatch.start();
+
+  @PaintBinding("Experience")
+  private final Skill[] skills = {Skill.FIREMAKING, Skill.FLETCHING};
+
+  @PaintBinding("State")
+  private final BooleanSupplier state = () -> getDomain().getState().shouldChop();
 
   private Domain getDomain() {
     return injector.getInstance(Domain.class);

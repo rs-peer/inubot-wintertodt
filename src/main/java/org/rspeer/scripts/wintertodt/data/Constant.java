@@ -4,6 +4,10 @@ import org.rspeer.commons.math.Range;
 
 public interface Constant {
 
+  String ROOT = "Bruma root";
+
+  String KINDLING = "Bruma kindling";
+
   /**
    * The ID of the wintertodt update client-sided runescript.
    * It is responsible for updating the wintertodt interface, which also displays the energy %.

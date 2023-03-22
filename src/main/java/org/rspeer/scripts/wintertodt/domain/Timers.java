@@ -19,6 +19,13 @@ public class Timers {
     animation = now;
   }
 
+  void message(String text) {
+    //This message will interrupt the player animation
+    if (text.contains("the cold of the wintertodt")) {
+      animation = 0;
+    }
+  }
+
   public boolean isIdle(int ticksThreshold) {
     return now - animation >= ticksThreshold;
   }

@@ -25,7 +25,7 @@ public class Boss {
     return getEnergy() == 0 && getTimer() > 0;
   }
 
-  public void update(RSScriptEvent src) {
+  public void updateEnergy(RSScriptEvent src) {
     if (src.getScriptId() != Constant.WINT_UPDATE_SCRIPT_ID) {
       return;
     }
