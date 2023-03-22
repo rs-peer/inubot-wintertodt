@@ -8,6 +8,7 @@ import org.rspeer.scripts.wintertodt.data.Constant;
 public class State {
 
   private boolean chop;
+  private int lastAnimation;
 
   void tick() {
     Inventory inv = Inventory.backpack();
@@ -20,5 +21,15 @@ public class State {
 
   public boolean shouldChop() {
     return chop;
+  }
+
+  public int getLastAnimation() {
+    return lastAnimation;
+  }
+
+  public void setLastAnimation(int lastAnimation) {
+    if (lastAnimation != -1) {
+      this.lastAnimation = lastAnimation;
+    }
   }
 }

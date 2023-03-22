@@ -12,8 +12,7 @@ import org.rspeer.game.script.meta.paint.PaintScheme;
 import org.rspeer.scripts.wintertodt.domain.Domain;
 import org.rspeer.scripts.wintertodt.task.game.FoodTask;
 import org.rspeer.scripts.wintertodt.task.game.WaitingAreaTask;
-import org.rspeer.scripts.wintertodt.task.game.brazier.BurnTask;
-import org.rspeer.scripts.wintertodt.task.game.brazier.LightBrazierTask;
+import org.rspeer.scripts.wintertodt.task.game.brazier.*;
 import org.rspeer.scripts.wintertodt.task.game.roots.ChopTask;
 import org.rspeer.scripts.wintertodt.task.generic.DialogTask;
 import org.rspeer.scripts.wintertodt.task.generic.RunTask;
@@ -22,6 +21,7 @@ import org.rspeer.scripts.wintertodt.task.prepare.*;
 @ScriptMeta(
     name = "Wintertodt K1LLA",
     developer = "Doga, Tupac, Kanye",
+    version = 1.02,
     paint = PaintScheme.class,
     regions = -3
 )
@@ -31,7 +31,12 @@ public class Wintertodt extends TaskScript {
   private final StopWatch runtime = StopWatch.start();
 
   @PaintBinding("Experience")
-  private final Skill[] skills = {Skill.FIREMAKING, Skill.WOODCUTTING, Skill.FLETCHING};
+  private final Skill[] skills = {
+      Skill.FIREMAKING,
+      Skill.WOODCUTTING,
+      Skill.FLETCHING,
+      Skill.CONSTRUCTION
+  };
 
   private Domain getDomain() {
     return injector.getInstance(Domain.class);
@@ -60,6 +65,7 @@ public class Wintertodt extends TaskScript {
         WaitingAreaTask.class,
         LightBrazierTask.class,
         BurnTask.class,
+        RepairTask.class,
         ChopTask.class
     );
   }

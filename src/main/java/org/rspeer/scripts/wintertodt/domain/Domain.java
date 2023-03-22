@@ -53,6 +53,7 @@ public class Domain {
   public void notify(AnimationEvent event) {
     if (event.getSource().equals(Players.self())) {
       timers.animate();
+      state.setLastAnimation(event.getCurrent());
     }
   }
 

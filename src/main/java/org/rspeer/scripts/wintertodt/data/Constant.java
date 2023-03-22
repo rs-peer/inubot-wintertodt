@@ -28,7 +28,7 @@ public interface Constant {
   int WINTERTODT_TIMER_VARBIT_ID = 7980;
 
   /**
-   * The ID of the snowfall EffectObject.
+   * The ID of the snowfall EffectObject.yh
    */
   int SNOWFALL_EFFECT_ID = 502;
 

@@ -10,17 +10,17 @@ import org.rspeer.scripts.wintertodt.data.action.Action;
 import org.rspeer.scripts.wintertodt.domain.Domain;
 import org.rspeer.scripts.wintertodt.task.game.ActionTask;
 
-@TaskDescriptor(name = "We gonna let it burn burn burn burn")
-public class BurnTask extends ActionTask {
+@TaskDescriptor(name = "Bob the builder can we fix it? Yes we can.")
+public class RepairTask extends ActionTask {
 
   @Inject
-  public BurnTask(Domain domain) {
+  public RepairTask(Domain domain) {
     super(domain);
   }
 
   @Override
   public Action getAction() {
-    return Action.BURN;
+    return Action.REPAIR;
   }
 
   @Override
@@ -34,14 +34,13 @@ public class BurnTask extends ActionTask {
       return false;
     }
 
-    //TODO fletch 1 log while moving between the logs and brazier.
-    SceneObject brazier = Province.findBrazier(domain.getConfig().getGang().getBrazier(), "Feed");
+    SceneObject brazier = Province.findBrazier(domain.getConfig().getGang().getBrazier(), "Fix");
     if (brazier != null) {
       if (brazier.distance() <= 2 && getAction().isActive(domain)) {
         return true;
       }
 
-      return brazier.interact("Feed");
+      return brazier.interact("Fix");
     }
 
     return false;

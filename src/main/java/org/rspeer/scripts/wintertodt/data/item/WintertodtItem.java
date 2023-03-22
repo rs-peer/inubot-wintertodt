@@ -1,10 +1,14 @@
 package org.rspeer.scripts.wintertodt.data.item;
 
 import org.rspeer.game.adapter.component.inventory.Inventory;
+import org.rspeer.game.query.component.ItemQuery;
+import org.rspeer.game.query.results.ItemQueryResults;
 import org.rspeer.scripts.wintertodt.data.position.Crate;
 import org.rspeer.scripts.wintertodt.domain.Config;
 
-public enum WintertodtItem {
+import java.util.function.Function;
+
+public enum WintertodtItem implements Function<ItemQuery, ItemQueryResults> {
 
   KNIFE(Crate.KNIFE, "Knife"),
   TINDERBOX(Crate.TINDERBOX, "Tinderbox"),
@@ -30,14 +34,19 @@ public enum WintertodtItem {
       return true;
     }
 
-    if (wearable && Inventory.equipment().contains(iq -> iq.nameContains(name).results())) {
+    if (wearable && Inventory.equipment().contains(this)) {
       return true;
     }
 
-    return Inventory.backpack().contains(iq -> iq.names(name).results());
+    return Inventory.backpack().contains(this);
   }
 
   public String getName() {
     return name;
+  }
+
+  @Override
+  public ItemQueryResults apply(ItemQuery iq) {
+    return iq.nameContains(name).results();
   }
 }

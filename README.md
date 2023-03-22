@@ -18,12 +18,12 @@ A wintertodt script written for the [Inubot client](https://inubot.com/)
 
 ## Planned
 
-* Repair brazier
 * Dodge snowfall
 * Fletching
 * Fletch 1 log while walking between the roots and brazier
-* Switching sides
-* Take items from crates if not in bank, inventory or equipment
+* Heal pyromancer or switch sides
+* Take required items from crates if not in bank, inventory or equipment
+* Adding idle tasks (between spawns - bankstanding skills, fletching darts/bolts etc)
 
 
 ## Usage

@@ -1,7 +1,6 @@
 package org.rspeer.scripts.wintertodt.task.prepare;
 
 import com.google.inject.Inject;
-import org.rspeer.commons.logging.Log;
 import org.rspeer.game.adapter.component.inventory.Bank;
 import org.rspeer.game.adapter.component.inventory.Inventory;
 import org.rspeer.game.script.Task;
@@ -10,8 +9,7 @@ import org.rspeer.scripts.wintertodt.api.Province;
 import org.rspeer.scripts.wintertodt.data.item.WintertodtItem;
 import org.rspeer.scripts.wintertodt.domain.Config;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @TaskDescriptor(
     name = "Banking!",
@@ -42,16 +40,23 @@ public class BankTask extends Task {
     }
 
     if (!Bank.isOpen()) {
+      if (config.isOpenCrates()) {
+        Inventory.backpack().getItems("Supply crate").forEach(x -> x.interact("Open"));
+      }
+
       Bank.open();
       sleepUntil(Bank::isOpen, 4);
       return true;
     }
 
+    String[] exceptions = Arrays.stream(WintertodtItem.values())
+        .map(WintertodtItem::getName)
+        .toArray(String[]::new);
+
     Bank bank = Inventory.bank();
-    bank.depositAll(iq -> iq.names("Supply crate").results());
+    bank.depositAllExcept(iq -> iq.nameContains(exceptions).results());
 
     for (WintertodtItem item : missing) {
-      Log.info("Withdrawing " + item.getName());
       bank.withdraw(item.getName(), 1);
     }
 
@@ -59,10 +64,10 @@ public class BankTask extends Task {
     int remainingFoodAmount = Inventory.backpack().getCount(iq -> iq.actions("Eat", "Drink").results());
     int foodRequired = config.getFoodAmount() - remainingFoodAmount;
     if (foodRequired > 0) {
-      Log.info("Withdrawing " + foodRequired + " food!");
       bank.withdraw(config.getFoodId(), foodRequired);
     }
 
     return true;
   }
+
 }
