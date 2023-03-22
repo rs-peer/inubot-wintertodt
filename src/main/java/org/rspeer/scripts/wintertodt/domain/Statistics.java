@@ -8,7 +8,7 @@ public class Statistics {
   private int kills;
   private int fails;
 
-  public void message(String text) {
+  void message(String text) {
     if (text.contains("did not earn enough points")) {
       fails++;
     } else if (text.contains("your subdued wintertodt count")) {
