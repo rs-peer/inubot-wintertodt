@@ -7,6 +7,7 @@ import org.rspeer.game.adapter.scene.EffectObject;
 import org.rspeer.game.event.*;
 import org.rspeer.game.scene.Players;
 import org.rspeer.game.script.event.ScriptConfigEvent;
+import org.rspeer.scripts.wintertodt.domain.config.Config;
 
 @Singleton
 public class Domain {

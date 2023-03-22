@@ -1,7 +1,7 @@
 package org.rspeer.scripts.wintertodt.data.position;
 
 import org.rspeer.game.position.Position;
-import org.rspeer.scripts.wintertodt.domain.Config;
+import org.rspeer.scripts.wintertodt.domain.config.Config;
 
 import java.util.function.Predicate;
 

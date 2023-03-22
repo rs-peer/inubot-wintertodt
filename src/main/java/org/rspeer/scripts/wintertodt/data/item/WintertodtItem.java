@@ -4,7 +4,7 @@ import org.rspeer.game.adapter.component.inventory.Inventory;
 import org.rspeer.game.query.component.ItemQuery;
 import org.rspeer.game.query.results.ItemQueryResults;
 import org.rspeer.scripts.wintertodt.data.position.Crate;
-import org.rspeer.scripts.wintertodt.domain.Config;
+import org.rspeer.scripts.wintertodt.domain.config.Config;
 
 import java.util.function.Function;
 

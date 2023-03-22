@@ -5,7 +5,7 @@ import org.rspeer.game.component.Worlds;
 import org.rspeer.game.script.Task;
 import org.rspeer.game.script.TaskDescriptor;
 import org.rspeer.scripts.wintertodt.data.locale.GameWorld;
-import org.rspeer.scripts.wintertodt.domain.Config;
+import org.rspeer.scripts.wintertodt.domain.config.Config;
 
 @TaskDescriptor(name = "Hopping to Wintertodt world!")
 public class HopTask extends Task {

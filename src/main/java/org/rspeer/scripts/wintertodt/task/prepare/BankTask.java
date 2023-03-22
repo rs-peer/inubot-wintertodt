@@ -8,7 +8,7 @@ import org.rspeer.game.script.Task;
 import org.rspeer.game.script.TaskDescriptor;
 import org.rspeer.scripts.wintertodt.api.Province;
 import org.rspeer.scripts.wintertodt.data.item.WintertodtItem;
-import org.rspeer.scripts.wintertodt.domain.Config;
+import org.rspeer.scripts.wintertodt.domain.config.Config;
 
 import java.util.*;
 

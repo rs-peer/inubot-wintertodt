@@ -1,4 +1,4 @@
-package org.rspeer.scripts.wintertodt.domain;
+package org.rspeer.scripts.wintertodt.domain.config;
 
 import com.google.inject.Singleton;
 import org.rspeer.game.adapter.component.inventory.Inventory;
@@ -10,24 +10,42 @@ import org.rspeer.scripts.wintertodt.data.position.Gang;
 @Singleton
 public class Config {
 
-  private boolean fletch = true;
-  private boolean openCrates = true;
+  private boolean fletch;
+  private boolean openCrates;
 
-  private Gang gang = Gang.WEST;
-  private GameWorld world = GameWorld.UK;
+  private Gang gang;
+  private GameWorld world;
 
-  private int foodId = 7946;
-  private int foodAmount = 5;
-  private int minimumFoodAmount = 2;
+  private int foodId;
+  private int foodAmount;
+  private int minimumFoodAmount;
 
+  /**
+   * Initialize with default values
+   */
+  public Config() {
+    initialize(new ConfigBuilder());
+  }
+
+  /**
+   * ScriptConfigEvent calls this if used
+   */
   public void initialize(ScriptConfig config) {
-    fletch = config.getBoolean("Fletch");
-    openCrates = config.getBoolean("Open crates");
-    gang = config.get("Side");
-    world = config.get("World");
-    foodId = config.getInteger("Food id");
-    foodAmount = config.getInteger("Food amount");
-    minimumFoodAmount = config.getInteger("Minimum food amount");
+    fletch = config.getBoolean(ConfigKey.FLETCH);
+    openCrates = config.getBoolean(ConfigKey.OPEN_CRATES);
+    gang = config.get(ConfigKey.GANG);
+    world = config.get(ConfigKey.WORLD);
+    foodId = config.getInteger(ConfigKey.FOOD_ID);
+    foodAmount = config.getInteger(ConfigKey.FOOD_AMOUNT);
+    minimumFoodAmount = config.getInteger(ConfigKey.MIN_FOOD_AMOUNT);
+  }
+
+  /**
+   * Initialize with a provided builder. Currently only used for the default values,
+   * but in the future I will use it for quickstart args
+   */
+  public void initialize(ConfigBuilder builder) {
+    initialize(builder.build());
   }
 
   public boolean isFletch() {

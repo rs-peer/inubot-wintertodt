@@ -24,6 +24,7 @@ A wintertodt script written for the [Inubot client](https://inubot.com/)
 * Heal pyromancer or switch sides
 * Take required items from crates if not in bank, inventory or equipment
 * Solo mode
+* Quickstart
 * Adding idle tasks (between spawns - bankstanding skills, fletching darts/bolts etc)
 
 
