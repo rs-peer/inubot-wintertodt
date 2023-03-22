@@ -8,7 +8,12 @@ import org.rspeer.scripts.wintertodt.data.Constant;
 @Singleton
 public class Boss {
 
+  private int points;
   private int energy;
+
+  public int getPoints() {
+    return points;
+  }
 
   public int getEnergy() {
     return energy;
@@ -40,6 +45,7 @@ public class Boss {
     //As illustrated above, the wintertodt energy % is internally a value between 0 and 3500.
     //We interpolate this to get a 1-100 value
     int value = (int) args[2];
+    points = (int) args[1];
     energy = (int) ((value / 3500.0 * 100.0) + 0.5);
   }
 }

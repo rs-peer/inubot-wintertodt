@@ -3,8 +3,6 @@ package org.rspeer.scripts.wintertodt.task.game.brazier;
 import com.google.inject.Inject;
 import org.rspeer.game.adapter.scene.Player;
 import org.rspeer.game.adapter.scene.SceneObject;
-import org.rspeer.game.component.tdi.Skill;
-import org.rspeer.game.component.tdi.Skills;
 import org.rspeer.game.movement.Movement;
 import org.rspeer.game.position.Position;
 import org.rspeer.game.scene.Players;
@@ -34,10 +32,6 @@ public class LightBrazierTask extends ActionTask {
 
   @Override
   protected boolean play() {
-    if (domain.getState().shouldChop()) {
-      return false;
-    }
-
     Player self = Players.self();
     if (self == null || self.isAnimating()) {
       return false;
@@ -54,14 +48,19 @@ public class LightBrazierTask extends ActionTask {
       return true;
     }
 
+    //TODO the above code will walk there but not light due to the below condition
+    //need to fix it to light at the start of every game
+    if (domain.getState().shouldChop()) {
+      return false;
+    }
+
     SceneObject object = Province.findBrazier(gang.getBrazier(), "Light");
-    if (object != null && object.interact("Light")) {
-      //TODO this sleep will not work if the player has 200m firemaking experience.
-      //A solution is to wait until I add SkillEvent to the bot, and use sleep(duration) instead of sleepUntil
-      //We can then call sleep(0) in the skillevent to halt the sleep
-      int xp = Skills.getExperience(Skill.FIREMAKING);
-      sleepUntil(() -> Skills.getExperience(Skill.FIREMAKING) != xp, getAction().getDuration());
-      return true;
+    if (object != null) {
+      if (object.distance() <= 2 && getAction().isActive(domain)) {
+        return true;
+      }
+
+      return object.interact("Light");
     }
 
     return false;

@@ -3,6 +3,7 @@ package org.rspeer.scripts.wintertodt.task.prepare;
 import com.google.inject.Inject;
 import org.rspeer.game.adapter.component.inventory.Bank;
 import org.rspeer.game.adapter.component.inventory.Inventory;
+import org.rspeer.game.effect.Health;
 import org.rspeer.game.script.Task;
 import org.rspeer.game.script.TaskDescriptor;
 import org.rspeer.scripts.wintertodt.api.Province;
@@ -63,6 +64,10 @@ public class BankTask extends Task {
     //We count actions rather than getFoodId from config because we may have leftover cake slices.
     int remainingFoodAmount = Inventory.backpack().getCount(iq -> iq.actions("Eat", "Drink").results());
     int foodRequired = config.getFoodAmount() - remainingFoodAmount;
+    if (Health.getPercent() < 35) {
+      foodRequired += 2;
+    }
+
     if (foodRequired > 0) {
       bank.withdraw(config.getFoodId(), foodRequired);
     }

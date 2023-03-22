@@ -10,6 +10,8 @@ public interface Constant {
 
   String KINDLING = "Bruma kindling";
 
+  int POINTS_THRESHOLD = 500;
+
   /**
    * The ID of the wintertodt update client-sided runescript.
    * It is responsible for updating the wintertodt interface, which also displays the energy %.
