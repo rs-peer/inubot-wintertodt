@@ -34,13 +34,14 @@ public class State {
       return;
     }
 
-    if (!inv.contains(Constant.BURNABLE)) {
+    int count = inv.getCount(Constant.BURNABLE);
+    if (count == 0) {
       chop = true;
       return;
     }
 
     //Just force burn
-    if (boss.getEnergy() < 10) {
+    if (boss.getEnergy() < 10 && count >= 3) {
       Log.info("Boss dying, forcing burn cycle");
       chop = false;
     }
@@ -60,7 +61,7 @@ public class State {
     return lastAnimation;
   }
 
-  public void setLastAnimation(int lastAnimation) {
+  void animate(int lastAnimation) {
     if (lastAnimation != -1) {
       this.lastAnimation = lastAnimation;
     }

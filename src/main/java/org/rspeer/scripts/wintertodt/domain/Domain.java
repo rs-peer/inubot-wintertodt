@@ -34,7 +34,7 @@ public class Domain {
 
   @Subscribe
   public void notify(ClientScriptEvent event) {
-    boss.updateEnergy(event.getSource());
+    boss.update(event.getSource());
   }
 
   @Subscribe
@@ -57,7 +57,7 @@ public class Domain {
   public void notify(AnimationEvent event) {
     if (event.getSource().equals(Players.self())) {
       timers.animate();
-      state.setLastAnimation(event.getCurrent());
+      state.animate(event.getCurrent());
     }
   }
 
