@@ -15,13 +15,15 @@ public class Domain {
   private final Boss boss;
   private final State state;
   private final Timers timers;
+  private final Statistics statistics;
 
   @Inject
-  public Domain(Config config, Boss boss, State state, Timers timers) {
+  public Domain(Config config, Boss boss, State state, Timers timers, Statistics statistics) {
     this.config = config;
     this.boss = boss;
     this.state = state;
     this.timers = timers;
+    this.statistics = statistics;
   }
 
   @Subscribe
@@ -46,6 +48,7 @@ public class Domain {
     if (type == ChatMessageEvent.Type.FILTERED || type == ChatMessageEvent.Type.GAME) {
       String text = event.getContents().toLowerCase();
       timers.message(text);
+      statistics.message(text);
     }
   }
 
@@ -77,5 +80,9 @@ public class Domain {
 
   public Timers getTimers() {
     return timers;
+  }
+
+  public Statistics getStatistics() {
+    return statistics;
   }
 }

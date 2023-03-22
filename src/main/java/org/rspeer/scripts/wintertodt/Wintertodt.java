@@ -18,6 +18,8 @@ import org.rspeer.scripts.wintertodt.task.generic.DialogTask;
 import org.rspeer.scripts.wintertodt.task.generic.RunTask;
 import org.rspeer.scripts.wintertodt.task.prepare.*;
 
+import java.util.function.IntSupplier;
+
 @ScriptMeta(
     name = "Wintertodt K1LLA",
     developer = "Doga, Tupac, Kanye",
@@ -29,6 +31,12 @@ public class Wintertodt extends TaskScript {
 
   @PaintBinding("Runtime")
   private final StopWatch runtime = StopWatch.start();
+
+  @PaintBinding(value = "Kills", rate = true)
+  private final IntSupplier kills = () -> getDomain().getStatistics().getKills();
+
+  @PaintBinding(value = "Failed kills", rate = true)
+  private final IntSupplier fails = () -> getDomain().getStatistics().getFails();
 
   @PaintBinding("Experience")
   private final Skill[] skills = {
