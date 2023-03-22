@@ -60,7 +60,6 @@ public class BankTask extends Task {
 
     Bank bank = Inventory.bank();
     bank.depositAllExcept(iq -> iq.nameContains(exceptions).results());
-    bank.depositAll(iq -> iq.noted().results()); //not sure why the above is ignoring these TODO
 
     for (WintertodtItem item : missing) {
       bank.withdraw(item.getName(), 1);
