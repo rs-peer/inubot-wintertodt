@@ -7,6 +7,7 @@ import org.rspeer.game.effect.Health;
 import org.rspeer.game.movement.Movement;
 import org.rspeer.game.scene.Players;
 import org.rspeer.game.script.TaskDescriptor;
+import org.rspeer.scripts.wintertodt.api.Items;
 import org.rspeer.scripts.wintertodt.data.Constant;
 import org.rspeer.scripts.wintertodt.domain.Domain;
 
@@ -30,7 +31,7 @@ public class WaitingAreaTask extends GameTask {
 
     //TODO if enough time and points are low just reset and bank...
 
-    Item food = Constant.FOOD.apply(Inventory.backpack().query()).first();
+    Item food = Items.FOOD.apply(Inventory.backpack().query()).first();
     if (food != null) {
       return false;
     }

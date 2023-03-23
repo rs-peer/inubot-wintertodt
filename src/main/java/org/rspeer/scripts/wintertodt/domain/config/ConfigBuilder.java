@@ -6,14 +6,11 @@ import org.rspeer.scripts.wintertodt.data.Gang;
 
 public class ConfigBuilder {
 
-  private final ScriptConfig config;
+  private final ScriptConfig config = new ScriptConfig();
 
-  public ConfigBuilder() {
-    this.config = new ScriptConfig();
-    initDefaults();
-  }
-
-  private void initDefaults() {
+  public static ConfigBuilder ofDefaults() {
+    ConfigBuilder builder = new ConfigBuilder();
+    ScriptConfig config = builder.config;
     config.put(ConfigKey.FLETCH, ConfigDefaults.FLETCH);
     config.put(ConfigKey.OPEN_CRATES, ConfigDefaults.OPEN_CRATES);
     config.put(ConfigKey.GANG, ConfigDefaults.GANG);
@@ -21,6 +18,12 @@ public class ConfigBuilder {
     config.put(ConfigKey.FOOD_ID, ConfigDefaults.FOOD_ID);
     config.put(ConfigKey.FOOD_AMOUNT, ConfigDefaults.FOOD_AMOUNT);
     config.put(ConfigKey.MIN_FOOD_AMOUNT, ConfigDefaults.MIN_FOOD_AMOUNT);
+    return builder;
+  }
+
+  public static ConfigBuilder ofArgs(String args) {
+    //TODO
+    return ofDefaults();
   }
 
   public ConfigBuilder fletch(boolean fletch) {

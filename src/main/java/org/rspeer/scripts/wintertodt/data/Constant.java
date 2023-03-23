@@ -3,10 +3,6 @@ package org.rspeer.scripts.wintertodt.data;
 import org.rspeer.commons.math.Range;
 import org.rspeer.game.position.Position;
 import org.rspeer.game.position.area.Area;
-import org.rspeer.game.query.component.ItemQuery;
-import org.rspeer.game.query.results.ItemQueryResults;
-
-import java.util.function.Function;
 
 public interface Constant {
 
@@ -53,8 +49,4 @@ public interface Constant {
       new Position(1628, 3984),
       new Position(1632, 3982)
   );
-
-  Function<ItemQuery, ItemQueryResults> FOOD = iq -> iq.actions("Eat", "Drink").results();
-
-  Function<ItemQuery, ItemQueryResults> BURNABLE = iq -> iq.names(Constant.KINDLING, Constant.ROOT).results();
 }

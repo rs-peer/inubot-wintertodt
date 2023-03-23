@@ -22,12 +22,7 @@ public class LightBrazierTask extends ActionTask {
 
   @Inject
   public LightBrazierTask(Domain domain) {
-    super(domain);
-  }
-
-  @Override
-  public Action getAction() {
-    return Action.LIGHT;
+    super(domain, Action.LIGHT);
   }
 
   @Override
@@ -56,7 +51,7 @@ public class LightBrazierTask extends ActionTask {
 
     SceneObject object = Province.findBrazier(gang.getBrazier(), "Light");
     if (object != null) {
-      if (object.distance() <= 2 && getAction().isActive(domain)) {
+      if (object.distance() <= 2 && action.isActive(domain)) {
         return true;
       }
 
@@ -75,6 +70,6 @@ public class LightBrazierTask extends ActionTask {
   private int getLightTicks(Position brazier) {
     //Running 2 tiles is a 1 tick action (or walking 1 tile)
     //To calculate ticks needed to light, we do movement ticks + light action ticks
-    return (int) (brazier.distance() / 2) + getAction().getDuration();
+    return (int) (brazier.distance() / 2) + action.getDuration();
   }
 }

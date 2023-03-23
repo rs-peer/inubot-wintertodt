@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.rspeer.commons.logging.Log;
 import org.rspeer.game.adapter.component.inventory.Inventory;
+import org.rspeer.scripts.wintertodt.api.Items;
 import org.rspeer.scripts.wintertodt.data.Constant;
 
 @Singleton
@@ -28,13 +29,13 @@ public class State {
 
     //Time is a limiting factor for reaching our (next) points threshold, so we force burn
     int remaining = Constant.POINTS_THRESHOLD - (boss.getPoints() % Constant.POINTS_THRESHOLD);
-    if (boss.getEnergy() < 25 && getStoredPoints(inv) >= remaining) {
+    if (boss.getEnergy() < 25 && Items.getStoredPoints(inv) >= remaining) {
       Log.info("Force burning due to time limiting factor");
       chop = false;
       return;
     }
 
-    int count = inv.getCount(Constant.BURNABLE);
+    int count = inv.getCount(Items.BURNABLE);
     if (count == 0) {
       chop = true;
       return;
@@ -45,12 +46,6 @@ public class State {
       Log.info("Boss dying, forcing burn cycle");
       chop = false;
     }
-  }
-
-  private int getStoredPoints(Inventory inv) {
-    int roots = inv.getCount(iq -> iq.names(Constant.ROOT).results());
-    int kindlings = inv.getCount(iq -> iq.names(Constant.KINDLING).results());
-    return (roots * 10) + (kindlings * 25);
   }
 
   public boolean shouldChop() {

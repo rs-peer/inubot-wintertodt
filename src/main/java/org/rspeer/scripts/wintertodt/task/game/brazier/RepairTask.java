@@ -15,12 +15,7 @@ public class RepairTask extends ActionTask {
 
   @Inject
   public RepairTask(Domain domain) {
-    super(domain);
-  }
-
-  @Override
-  public Action getAction() {
-    return Action.REPAIR;
+    super(domain, Action.REPAIR);
   }
 
   @Override
@@ -39,7 +34,7 @@ public class RepairTask extends ActionTask {
       return false;
     }
 
-    if (brazier.distance() <= 2 && getAction().isActive(domain)) {
+    if (brazier.distance() <= 2 && action.isActive(domain)) {
       return true;
     }
 

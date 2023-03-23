@@ -6,8 +6,8 @@ import org.rspeer.game.adapter.component.inventory.Inventory;
 import org.rspeer.game.effect.Health;
 import org.rspeer.game.script.Task;
 import org.rspeer.game.script.TaskDescriptor;
+import org.rspeer.scripts.wintertodt.api.Items;
 import org.rspeer.scripts.wintertodt.api.Province;
-import org.rspeer.scripts.wintertodt.data.Constant;
 import org.rspeer.scripts.wintertodt.data.WintertodtItem;
 import org.rspeer.scripts.wintertodt.domain.config.Config;
 
@@ -66,7 +66,7 @@ public class BankTask extends Task {
     }
 
     //We count actions rather than getFoodId from config because we may have leftover cake slices.
-    int remainingFoodAmount = Inventory.backpack().getCount(Constant.FOOD);
+    int remainingFoodAmount = Inventory.backpack().getCount(Items.FOOD);
     int foodRequired = config.getFoodAmount() - remainingFoodAmount;
     if (Health.getPercent() < 35) {
       foodRequired += 2;

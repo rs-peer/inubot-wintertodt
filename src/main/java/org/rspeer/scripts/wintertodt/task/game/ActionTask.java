@@ -5,9 +5,10 @@ import org.rspeer.scripts.wintertodt.domain.Domain;
 
 public abstract class ActionTask extends GameTask {
 
-  protected ActionTask(Domain domain) {
-    super(domain);
-  }
+  protected final Action action;
 
-  public abstract Action getAction();
+  protected ActionTask(Domain domain, Action action) {
+    super(domain);
+    this.action = action;
+  }
 }

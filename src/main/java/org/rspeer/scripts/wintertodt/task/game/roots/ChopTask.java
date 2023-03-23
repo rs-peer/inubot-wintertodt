@@ -15,12 +15,7 @@ public class ChopTask extends ActionTask {
 
   @Inject
   public ChopTask(Domain domain) {
-    super(domain);
-  }
-
-  @Override
-  public Action getAction() {
-    return Action.CHOP;
+    super(domain, Action.CHOP);
   }
 
   @Override

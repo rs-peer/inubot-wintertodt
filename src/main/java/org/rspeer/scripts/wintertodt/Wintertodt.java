@@ -10,10 +10,13 @@ import org.rspeer.game.script.meta.ScriptMeta;
 import org.rspeer.game.script.meta.paint.PaintBinding;
 import org.rspeer.game.script.meta.paint.PaintScheme;
 import org.rspeer.scripts.wintertodt.domain.Domain;
+import org.rspeer.scripts.wintertodt.domain.config.Config;
+import org.rspeer.scripts.wintertodt.domain.config.ConfigBuilder;
 import org.rspeer.scripts.wintertodt.task.game.FoodTask;
 import org.rspeer.scripts.wintertodt.task.game.WaitingAreaTask;
 import org.rspeer.scripts.wintertodt.task.game.brazier.*;
 import org.rspeer.scripts.wintertodt.task.game.roots.ChopTask;
+import org.rspeer.scripts.wintertodt.task.game.roots.FletchTask;
 import org.rspeer.scripts.wintertodt.task.generic.DialogTask;
 import org.rspeer.scripts.wintertodt.task.generic.RunTask;
 import org.rspeer.scripts.wintertodt.task.prepare.*;
@@ -23,7 +26,7 @@ import java.util.function.IntSupplier;
 @ScriptMeta(
     name = "Wintertodt K1LLA",
     developer = "Doga, Tupac, Kanye",
-    version = 1.03,
+    version = 1.05,
     paint = PaintScheme.class,
     regions = -3
 )
@@ -51,6 +54,16 @@ public class Wintertodt extends TaskScript {
   }
 
   @Override
+  public void processArgs(String args) {
+    if (args == null || args.isEmpty()) {
+      return;
+    }
+
+    Config config = getDomain().getConfig();
+    config.initialize(ConfigBuilder.ofArgs(args));
+  }
+
+  @Override
   public void initialize() {
     Game.getEventDispatcher().subscribe(getDomain());
   }
@@ -74,7 +87,8 @@ public class Wintertodt extends TaskScript {
         LightBrazierTask.class,
         BurnTask.class,
         RepairTask.class,
-        ChopTask.class
+        ChopTask.class,
+        FletchTask.class
     );
   }
 }

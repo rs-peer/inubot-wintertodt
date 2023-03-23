@@ -8,7 +8,7 @@ import org.rspeer.scripts.wintertodt.domain.Domain;
 public enum Action {
 
   REPAIR(3676, 3),
-  FLETCH(1248, 3),
+  FLETCH(1248, 4),
   CHOP(2846, 4),
   BURN(832, 4),
   LIGHT(733, 4);

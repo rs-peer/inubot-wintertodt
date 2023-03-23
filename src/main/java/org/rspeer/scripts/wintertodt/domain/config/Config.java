@@ -3,6 +3,7 @@ package org.rspeer.scripts.wintertodt.domain.config;
 import com.google.inject.Singleton;
 import org.rspeer.game.adapter.component.inventory.Inventory;
 import org.rspeer.game.script.meta.ScriptConfig;
+import org.rspeer.scripts.wintertodt.api.Items;
 import org.rspeer.scripts.wintertodt.data.*;
 
 @Singleton
@@ -22,7 +23,7 @@ public class Config {
    * Initialize with default values
    */
   public Config() {
-    initialize(new ConfigBuilder());
+    initialize(ConfigBuilder.ofDefaults());
   }
 
   /**
@@ -81,6 +82,6 @@ public class Config {
       }
     }
 
-    return Inventory.backpack().getCount(Constant.FOOD) >= minimumFoodAmount;
+    return Inventory.backpack().getCount(Items.FOOD) >= minimumFoodAmount;
   }
 }

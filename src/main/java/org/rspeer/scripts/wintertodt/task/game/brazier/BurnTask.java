@@ -15,12 +15,7 @@ public class BurnTask extends ActionTask {
 
   @Inject
   public BurnTask(Domain domain) {
-    super(domain);
-  }
-
-  @Override
-  public Action getAction() {
-    return Action.BURN;
+    super(domain, Action.BURN);
   }
 
   @Override
@@ -34,13 +29,12 @@ public class BurnTask extends ActionTask {
       return false;
     }
 
-    //TODO fletch 1 log while moving between the logs and brazier.
     SceneObject brazier = Province.findBrazier(domain.getConfig().getGang().getBrazier(), "Feed");
     if (brazier == null) {
       return false;
     }
 
-    if (brazier.distance() <= 2 && getAction().isActive(domain)) {
+    if (brazier.distance() <= 2 && action.isActive(domain)) {
       return true;
     }
 

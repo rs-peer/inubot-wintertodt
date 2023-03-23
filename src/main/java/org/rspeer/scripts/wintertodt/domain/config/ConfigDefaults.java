@@ -3,9 +3,13 @@ package org.rspeer.scripts.wintertodt.domain.config;
 import org.rspeer.scripts.wintertodt.data.GameWorld;
 import org.rspeer.scripts.wintertodt.data.Gang;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
 public interface ConfigDefaults {
 
-  boolean FLETCH = false;
+  boolean FLETCH = true;
 
   boolean OPEN_CRATES = true;
 
@@ -17,5 +21,17 @@ public interface ConfigDefaults {
 
   int FOOD_AMOUNT = 5;
 
-  int MIN_FOOD_AMOUNT = 2;
+  int MIN_FOOD_AMOUNT = 3;
+
+  static List<Object> values() {
+    List<Object> values = new ArrayList<>();
+    for (Field field : ConfigKey.class.getDeclaredFields()) {
+      try {
+        values.add(field.get(null));
+      } catch (IllegalAccessException e) {
+        throw new RuntimeException(e);
+      }
+    }
+    return values;
+  }
 }
