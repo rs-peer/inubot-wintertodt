@@ -1,7 +1,6 @@
 package org.rspeer.scripts.wintertodt.domain;
 
 import com.google.inject.Singleton;
-import jag.script.RSScriptEvent;
 import org.rspeer.game.Vars;
 import org.rspeer.scripts.wintertodt.data.Constant;
 
@@ -30,16 +29,7 @@ public class Boss {
     return getEnergy() == 0 && getRespawnTimer() > 0;
   }
 
-  public void update(RSScriptEvent src) {
-    if (src.getScriptId() != Constant.WINT_UPDATE_SCRIPT_ID) {
-      return;
-    }
-
-    Object[] args = src.getArgs();
-    if (args == null || args.length < 2) {
-      return;
-    }
-
+  public void update(Object[] args) {
     //[clientscript,wint_update](int $int0, int $int1, int $int2, int $int3, int $int4, int $int5, int $int6, int $int7, int $int8, int $int9)
     //if_settext("Wintertodt's Energy: <tostring(interpolate(1, 100, 0, 3500, $int1))>%", interface_396:21);
     //As illustrated above, the wintertodt energy % is internally a value between 0 and 3500.

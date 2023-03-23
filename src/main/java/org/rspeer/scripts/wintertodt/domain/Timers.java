@@ -29,6 +29,10 @@ public class Timers {
     }
   }
 
+  public int now() {
+    return now;
+  }
+
   public boolean isIdle(int ticksThreshold) {
     return now - animation >= ticksThreshold;
   }

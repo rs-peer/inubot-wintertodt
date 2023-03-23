@@ -10,6 +10,8 @@ public interface Constant {
 
   String KINDLING = "Bruma kindling";
 
+  int BROKEN_BRAZIER = 29313;
+
   int POINTS_THRESHOLD = 500;
 
   /**
@@ -30,9 +32,14 @@ public interface Constant {
   int WINTERTODT_TIMER_VARBIT_ID = 7980;
 
   /**
-   * The ID of the snowfall EffectObject.yh
+   * The ID of the snowfall EffectObject.
    */
   int SNOWFALL_EFFECT_ID = 502;
+
+  /**
+   * The ID of the 3x3 AoE snowfall EffectObject
+   */
+  int DANGEROUS_SNOWFALL_EFFECT_ID = 1311;
 
   /**
    * A range indicating when run should be re-toggled if it was depleted.

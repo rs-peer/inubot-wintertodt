@@ -2,11 +2,12 @@ package org.rspeer.scripts.wintertodt.domain;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import jag.script.RSScriptEvent;
 import org.rspeer.event.Subscribe;
-import org.rspeer.game.adapter.scene.EffectObject;
 import org.rspeer.game.event.*;
 import org.rspeer.game.scene.Players;
 import org.rspeer.game.script.event.ScriptConfigEvent;
+import org.rspeer.scripts.wintertodt.data.Constant;
 import org.rspeer.scripts.wintertodt.domain.config.Config;
 
 @Singleton
@@ -34,7 +35,18 @@ public class Domain {
 
   @Subscribe
   public void notify(ClientScriptEvent event) {
-    boss.update(event.getSource());
+    RSScriptEvent src = event.getSource();
+    if (src.getScriptId() != Constant.WINT_UPDATE_SCRIPT_ID) {
+      return;
+    }
+
+    Object[] args = src.getArgs();
+    if (args == null || args.length < 2) {
+      return;
+    }
+
+    boss.update(args);
+    state.broadcast(args);
   }
 
   @Subscribe
@@ -59,12 +71,6 @@ public class Domain {
       timers.animate();
       state.animate(event.getCurrent());
     }
-  }
-
-  @Subscribe
-  public void notify(EffectObjectSpawnEvent event) {
-    EffectObject fx = event.getSource();
-    //We will be using this to detect snowfall.
   }
 
   public Config getConfig() {

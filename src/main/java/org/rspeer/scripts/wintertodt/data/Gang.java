@@ -11,12 +11,6 @@ public enum Gang {
       new Position(1621, 3996)
   ),
 
-  EAST("East",
-      new Position(1638, 3997),
-      new Position(1639, 3988),
-      new Position(1639, 3996)
-  ),
-
   NORTH_WEST("North-West",
       new Position(1620, 4015),
       new Position(1621, 4025),
@@ -27,6 +21,12 @@ public enum Gang {
       new Position(1638, 4015),
       new Position(1638, 4025),
       new Position(1639, 4018)
+  ),
+
+  EAST("East",
+      new Position(1638, 3997),
+      new Position(1639, 3988),
+      new Position(1639, 3996)
   );
 
   private final String name;

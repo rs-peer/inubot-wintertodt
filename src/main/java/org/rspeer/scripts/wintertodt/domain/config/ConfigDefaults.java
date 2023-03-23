@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ConfigDefaults {
 
-  boolean FLETCH = true;
+  boolean FLETCH = false;
 
   boolean OPEN_CRATES = true;
 
