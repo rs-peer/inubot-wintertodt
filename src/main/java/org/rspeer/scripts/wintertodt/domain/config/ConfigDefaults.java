@@ -13,7 +13,7 @@ public interface ConfigDefaults {
 
   GameWorld WORLD = GameWorld.UK;
 
-  int FOOD_ID = 7946;
+  int FOOD_ID = 385;
 
   int FOOD_AMOUNT = 5;
 
