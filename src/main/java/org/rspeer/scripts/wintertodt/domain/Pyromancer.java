@@ -7,7 +7,7 @@ public class Pyromancer {
   private final Timers timers;
   private final Gang gang;
 
-  private boolean fallen = false;
+  private boolean fallen;
   private int fallenTick;
 
   public Pyromancer(Timers timers, Gang gang) {
