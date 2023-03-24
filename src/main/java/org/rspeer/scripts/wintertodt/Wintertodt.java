@@ -12,13 +12,11 @@ import org.rspeer.game.script.meta.paint.PaintScheme;
 import org.rspeer.scripts.wintertodt.domain.Domain;
 import org.rspeer.scripts.wintertodt.domain.config.Config;
 import org.rspeer.scripts.wintertodt.domain.config.ConfigBuilder;
-import org.rspeer.scripts.wintertodt.task.game.FoodTask;
 import org.rspeer.scripts.wintertodt.task.game.WaitingAreaTask;
 import org.rspeer.scripts.wintertodt.task.game.brazier.*;
 import org.rspeer.scripts.wintertodt.task.game.roots.ChopTask;
 import org.rspeer.scripts.wintertodt.task.game.roots.FletchTask;
-import org.rspeer.scripts.wintertodt.task.generic.DialogTask;
-import org.rspeer.scripts.wintertodt.task.generic.RunTask;
+import org.rspeer.scripts.wintertodt.task.generic.*;
 import org.rspeer.scripts.wintertodt.task.prepare.*;
 
 import java.util.function.IntSupplier;
