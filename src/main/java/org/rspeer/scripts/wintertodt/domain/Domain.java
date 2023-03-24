@@ -63,6 +63,7 @@ public class Domain {
       String text = event.getContents().toLowerCase();
       timers.message(text);
       statistics.message(text);
+      state.message(text);
     }
   }
 

@@ -21,6 +21,7 @@ public class State {
   private int lastAnimation;
   private boolean chop;
   private Gang gang;
+  private boolean relog;
 
   @Inject
   public State(Boss boss, Timers timers, Config config) {
@@ -82,6 +83,13 @@ public class State {
     }
   }
 
+  void message(String text) {
+    if (text.contains("you will be logged out in approximately 5 minutes")) {
+      relog = true;
+    }
+  }
+
+
   void update(Pyromancer source, Gang original) {
     if (source.getGang() == original) {
       gang = source.isDead() ? alternate(original) : original;
@@ -107,5 +115,13 @@ public class State {
 
   public Gang getGang() {
     return gang;
+  }
+
+  public boolean isRelog() {
+    return relog;
+  }
+
+  public void setRelog(boolean relog) {
+    this.relog = relog;
   }
 }

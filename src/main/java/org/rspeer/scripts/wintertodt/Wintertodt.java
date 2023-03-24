@@ -86,7 +86,8 @@ public class Wintertodt extends TaskScript {
         BurnTask.class,
         RepairTask.class,
         ChopTask.class,
-        FletchTask.class
+        FletchTask.class,
+        RelogTask.class
     );
   }
 }
