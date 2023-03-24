@@ -13,6 +13,7 @@ mostly for educational purposes.
 * Strong modelling around the game tick system, using ticks to measure animations, delays and more
 * Utilises the builder pattern for configuration of the script 
 * Very efficient script in general, but this comes with having strong game knowledge
+* Utilises client-sided runescripts to read data from the game as opposed to reading from interfaces
 
 ## Features
 
@@ -37,6 +38,9 @@ mostly for educational purposes.
 * Solo mode
 * Quickstart
 * Adding idle tasks (between spawns - bankstanding skills, fletching darts/bolts etc)
+* Dragon axe special attack
+* PoH and rejuv pool after each kill
+* Restock food?
 
 ## Usage
 

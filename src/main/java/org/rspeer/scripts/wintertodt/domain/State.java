@@ -6,6 +6,7 @@ import org.rspeer.game.adapter.component.inventory.Inventory;
 import org.rspeer.scripts.wintertodt.api.Items;
 import org.rspeer.scripts.wintertodt.data.Constant;
 import org.rspeer.scripts.wintertodt.data.Gang;
+import org.rspeer.scripts.wintertodt.domain.config.Config;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -22,9 +23,10 @@ public class State {
   private Gang gang;
 
   @Inject
-  public State(Boss boss, Timers timers) {
+  public State(Boss boss, Timers timers, Config config) {
     this.boss = boss;
     this.timers = timers;
+    this.gang = config.getGang();
     this.pyromancers = initializePyromancers();
   }
 
@@ -106,6 +108,4 @@ public class State {
   public Gang getGang() {
     return gang;
   }
-
-
 }
