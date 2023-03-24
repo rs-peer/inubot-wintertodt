@@ -2,7 +2,6 @@ package org.rspeer.scripts.wintertodt.domain;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import org.rspeer.commons.logging.Log;
 import org.rspeer.game.adapter.component.inventory.Inventory;
 import org.rspeer.scripts.wintertodt.api.Items;
 import org.rspeer.scripts.wintertodt.data.Constant;
@@ -20,6 +19,7 @@ public class State {
 
   private int lastAnimation;
   private boolean chop;
+  private Gang gang;
 
   @Inject
   public State(Boss boss, Timers timers) {
@@ -51,7 +51,6 @@ public class State {
     //Time is a limiting factor for reaching our (next) points threshold, so we force burn
     int remaining = Constant.POINTS_THRESHOLD - (boss.getPoints() % Constant.POINTS_THRESHOLD);
     if (boss.getEnergy() < 25 && Items.getStoredPoints(inv) >= remaining) {
-      Log.info("Force burning due to time limiting factor");
       chop = false;
       return;
     }
@@ -64,7 +63,6 @@ public class State {
 
     //Just force burn
     if (boss.getEnergy() < 10 && count >= 3) {
-      Log.info("Boss dying, forcing burn cycle");
       chop = false;
     }
   }
@@ -82,6 +80,21 @@ public class State {
     }
   }
 
+  void update(Pyromancer source, Gang original) {
+    if (source.getGang() == original) {
+      gang = source.isDead() ? alternate(original) : original;
+    }
+  }
+
+  private Gang alternate(Gang src) {
+    //TODO verify that the alternate gang is not also a dead pyromancer
+    //very unlikely but it can happen? can easily just pass in the pyromancer map and work with it
+    return switch (src) {
+      case WEST, NORTH_EAST -> Gang.EAST;
+      case EAST, NORTH_WEST -> Gang.WEST;
+    };
+  }
+
   public boolean shouldChop() {
     return chop;
   }
@@ -90,7 +103,9 @@ public class State {
     return lastAnimation;
   }
 
-  public Pyromancer getPyromancer(Gang gang) {
-    return pyromancers.get(gang);
+  public Gang getGang() {
+    return gang;
   }
+
+
 }

@@ -29,7 +29,7 @@ public class ChopTask extends ActionTask {
       return false;
     }
 
-    SceneObject root = Province.findRoots(domain.getConfig().getGang().getRoots());
+    SceneObject root = Province.findRoots(domain.getState().getGang().getRoots());
     return root != null && root.interact("Chop");
   }
 }

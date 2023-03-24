@@ -32,7 +32,7 @@ public class LightBrazierTask extends ActionTask {
       return false;
     }
 
-    Gang gang = domain.getConfig().getGang();
+    Gang gang = domain.getState().getGang();
     if (isSpawning(gang.getStep())) {
       //Walk to the brazier as the game is starting
       if (self.isMoving() || gang.getBrazier().distance() <= 2) {

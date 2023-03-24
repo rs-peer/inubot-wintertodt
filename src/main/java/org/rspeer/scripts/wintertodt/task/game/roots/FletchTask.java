@@ -40,7 +40,7 @@ public class FletchTask extends ActionTask {
     }
 
     //Only start fletching while moving
-    if (!self.isMoving() && domain.getConfig().getGang().getBrazier().distance() > 2) {
+    if (!self.isMoving() && domain.getState().getGang().getBrazier().distance() > 2) {
       return false;
     }
 

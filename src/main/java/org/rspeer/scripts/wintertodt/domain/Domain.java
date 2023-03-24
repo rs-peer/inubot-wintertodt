@@ -7,6 +7,7 @@ import org.rspeer.event.Subscribe;
 import org.rspeer.game.event.*;
 import org.rspeer.game.scene.Players;
 import org.rspeer.game.script.event.ScriptConfigEvent;
+import org.rspeer.scripts.wintertodt.api.PyromancerEvent;
 import org.rspeer.scripts.wintertodt.data.Constant;
 import org.rspeer.scripts.wintertodt.domain.config.Config;
 
@@ -71,6 +72,11 @@ public class Domain {
       timers.animate();
       state.animate(event.getCurrent());
     }
+  }
+
+  @Subscribe
+  public void notify(PyromancerEvent event) {
+    state.update(event.getSource(), config.getGang());
   }
 
   public Config getConfig() {

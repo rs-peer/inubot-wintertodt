@@ -29,7 +29,7 @@ public class BurnTask extends ActionTask {
       return false;
     }
 
-    SceneObject brazier = Province.findBrazier(domain.getConfig().getGang().getBrazier(), "Feed");
+    SceneObject brazier = Province.findBrazier(domain.getState().getGang().getBrazier(), "Feed");
     if (brazier == null) {
       return false;
     }

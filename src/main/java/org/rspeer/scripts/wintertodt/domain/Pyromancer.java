@@ -1,5 +1,7 @@
 package org.rspeer.scripts.wintertodt.domain;
 
+import org.rspeer.game.Game;
+import org.rspeer.scripts.wintertodt.api.PyromancerEvent;
 import org.rspeer.scripts.wintertodt.data.Gang;
 
 public class Pyromancer {
@@ -16,7 +18,7 @@ public class Pyromancer {
   }
 
   public boolean isDead() {
-    return timers.now() - fallenTick >= 3;
+    return fallen && timers.now() - fallenTick >= 3;
   }
 
   void fall() {
@@ -34,10 +36,11 @@ public class Pyromancer {
   void update(int state) {
     if (state == 0) {
       fall();
-      return;
+    } else {
+      reset();
     }
 
-    reset();
+    Game.getEventDispatcher().forward(new PyromancerEvent(this));
   }
 
   Gang getGang() {

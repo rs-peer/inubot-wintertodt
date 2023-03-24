@@ -29,7 +29,7 @@ public class RepairTask extends ActionTask {
       return false;
     }
 
-    SceneObject brazier = Province.findBrazier(domain.getConfig().getGang().getBrazier(), "Fix");
+    SceneObject brazier = Province.findBrazier(domain.getState().getGang().getBrazier(), "Fix");
     if (brazier == null) {
       return false;
     }
