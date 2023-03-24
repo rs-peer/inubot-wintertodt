@@ -43,8 +43,7 @@ mostly for educational purposes.
 There is currently no UI, and it is not released on the store or included in the bot.
 Due to this, you'll be required to compile it yourself.
 If you have some java knowledge you can also edit the variables in the
-[Config](https://github.com/d-o-g/inubot-wintertodt/blob/master/src/main/java/org/rspeer/scripts
-/wintertodt/domain/config/ConfigDefaults.java)
+[Config](https://github.com/d-o-g/inubot-wintertodt/blob/master/src/main/java/org/rspeer/scripts/wintertodt/domain/config/ConfigDefaults.java)
 class to your liking.
 
 ## License
