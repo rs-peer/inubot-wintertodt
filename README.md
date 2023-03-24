@@ -1,6 +1,18 @@
 # Wintertodt
 
-A wintertodt script written for the [Inubot client](https://inubot.com/)
+A wintertodt script written for the [Inubot client](https://inubot.com/), 
+mostly for educational purposes.
+
+* Demonstrates usage of the core query API
+* Utilises PaintBinding to automatically generate a paint
+* A good example of script design and architecture 
+* Shows you how to use TaskScript
+* Shows you basic Guice usage for dependency injection
+* Makes use of the event listeners provided in the bot, as well as implementing a custom 
+  PyromancerEvent
+* Strong modelling around the game tick system, using ticks to measure animations, delays and more
+* Utilises the builder pattern for configuration of the script 
+* Very efficient script in general, but this comes with having strong game knowledge
 
 ## Features
 
