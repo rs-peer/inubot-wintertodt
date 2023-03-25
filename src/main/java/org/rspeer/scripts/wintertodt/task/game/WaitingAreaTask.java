@@ -41,7 +41,7 @@ public class WaitingAreaTask extends GameTask {
     }
 
     //TODO Polarize this to select a tile from the area closest to the Gang defined in Config rather than random tile.
-    Movement.walkTo(Constant.WAITING_AREA.getRandomTile());
+    Movement.walkTowards(Constant.WAITING_AREA.getRandomTile());
     return true;
   }
 }
