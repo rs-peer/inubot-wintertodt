@@ -23,7 +23,7 @@ public class Config {
    * Initialize with default values
    */
   public Config() {
-    initialize(ConfigBuilder.ofDefaults());
+    //initialize(ConfigBuilder.ofDefaults());
   }
 
   /**

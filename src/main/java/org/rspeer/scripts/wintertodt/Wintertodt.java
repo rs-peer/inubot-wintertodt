@@ -9,9 +9,14 @@ import org.rspeer.game.script.TaskScript;
 import org.rspeer.game.script.meta.ScriptMeta;
 import org.rspeer.game.script.meta.paint.PaintBinding;
 import org.rspeer.game.script.meta.paint.PaintScheme;
+import org.rspeer.game.script.meta.ui.ScriptOption;
+import org.rspeer.game.script.meta.ui.ScriptUI;
+import org.rspeer.scripts.wintertodt.data.GameWorld;
+import org.rspeer.scripts.wintertodt.data.Gang;
 import org.rspeer.scripts.wintertodt.domain.Domain;
 import org.rspeer.scripts.wintertodt.domain.config.Config;
 import org.rspeer.scripts.wintertodt.domain.config.ConfigBuilder;
+import org.rspeer.scripts.wintertodt.task.UITask;
 import org.rspeer.scripts.wintertodt.task.game.WaitingAreaTask;
 import org.rspeer.scripts.wintertodt.task.game.brazier.*;
 import org.rspeer.scripts.wintertodt.task.game.roots.ChopTask;
@@ -24,10 +29,19 @@ import java.util.function.IntSupplier;
 @ScriptMeta(
     name = "Wintertodt K1LLA",
     developer = "Doga, Tupac, Kanye",
-    version = 1.06,
+    version = 1.07,
     paint = PaintScheme.class,
     regions = -3
 )
+@ScriptUI({
+    @ScriptOption(name = "Fletch", type = boolean.class),
+    @ScriptOption(name = "Open crates", type = boolean.class),
+    @ScriptOption(name = "Side", type = Gang.class),
+    @ScriptOption(name = "World", type = GameWorld.class),
+    @ScriptOption(name = "Food id", type = int.class),
+    @ScriptOption(name = "Food amount", type = int.class),
+    @ScriptOption(name = "Minimum food amount", type = int.class)
+})
 public class Wintertodt extends TaskScript {
 
   @PaintBinding("Runtime")
@@ -74,6 +88,7 @@ public class Wintertodt extends TaskScript {
   @Override
   protected Class<? extends Task>[] tasks() {
     return ArrayUtils.getTypeSafeArray(
+        UITask.class,
         HopTask.class,
         DialogTask.class,
         RunTask.class,
