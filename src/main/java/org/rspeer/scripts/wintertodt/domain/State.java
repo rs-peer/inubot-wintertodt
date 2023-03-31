@@ -99,10 +99,16 @@ public class State {
   private Gang alternate(Gang src) {
     //TODO verify that the alternate gang is not also a dead pyromancer
     //very unlikely but it can happen? can easily just pass in the pyromancer map and work with it
-    return switch (src) {
-      case WEST, NORTH_EAST -> Gang.EAST;
-      case EAST, NORTH_WEST -> Gang.WEST;
-    };
+    switch (src) {
+      case WEST:
+      case NORTH_EAST:
+        return Gang.EAST;
+      case EAST:
+      case NORTH_WEST:
+        return Gang.WEST;
+      default:
+        throw new IllegalArgumentException();
+    }
   }
 
   public boolean shouldChop() {
