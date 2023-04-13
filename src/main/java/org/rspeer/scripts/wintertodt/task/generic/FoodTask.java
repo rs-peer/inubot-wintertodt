@@ -11,7 +11,7 @@ import org.rspeer.scripts.wintertodt.api.Province;
 import org.rspeer.scripts.wintertodt.data.Constant;
 import org.rspeer.scripts.wintertodt.domain.Domain;
 
-@TaskDescriptor(name = "Eating")
+@TaskDescriptor(name = "Eating", priority = 300)
 public class FoodTask extends Task {
 
   private final Domain domain;
