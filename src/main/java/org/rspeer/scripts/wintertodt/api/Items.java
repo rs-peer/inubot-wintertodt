@@ -15,6 +15,9 @@ public final class Items {
   public static final Function<ItemQuery, ItemQueryResults> FOOD
       = iq -> iq.actions("Eat", "Drink").results();
 
+  public static final Function<ItemQuery, ItemQueryResults> JUNK
+      = iq -> iq.names("Vial", "Jug").results();
+
   private Items() {
     throw new IllegalAccessError();
   }
