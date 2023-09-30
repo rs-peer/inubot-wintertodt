@@ -86,7 +86,7 @@ public class Wintertodt extends TaskScript {
   }
 
   @Override
-  protected Class<? extends Task>[] tasks() {
+  public Class<? extends Task>[] tasks() {
     return ArrayUtils.getTypeSafeArray(
         UITask.class,
         HopTask.class,
