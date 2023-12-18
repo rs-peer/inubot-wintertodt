@@ -1,8 +1,13 @@
 package org.rspeer.scripts.wintertodt.task.prepare;
 
 import com.google.inject.Inject;
+import org.rspeer.game.Definitions;
 import org.rspeer.game.adapter.component.inventory.Bank;
 import org.rspeer.game.adapter.component.inventory.Inventory;
+import org.rspeer.game.adapter.definition.ItemDefinition;
+import org.rspeer.game.component.Item;
+import org.rspeer.game.config.item.entry.builder.ItemEntryBuilder;
+import org.rspeer.game.config.item.loadout.BackpackLoadout;
 import org.rspeer.game.effect.Health;
 import org.rspeer.game.script.Task;
 import org.rspeer.game.script.TaskDescriptor;
@@ -10,8 +15,6 @@ import org.rspeer.scripts.wintertodt.api.Items;
 import org.rspeer.scripts.wintertodt.api.Province;
 import org.rspeer.scripts.wintertodt.data.WintertodtItem;
 import org.rspeer.scripts.wintertodt.domain.config.Config;
-
-import java.util.*;
 
 @TaskDescriptor(
     name = "Banking!",
@@ -34,35 +37,43 @@ public class BankTask extends Task {
       return false;
     }
 
-    List<WintertodtItem> missing = new ArrayList<>();
-    for (WintertodtItem item : WintertodtItem.values()) {
-      if (!item.isPresent(config)) {
-        missing.add(item);
-      }
-    }
-
     if (!Bank.isOpen()) {
       if (config.isOpenCrates()) {
-        Inventory.backpack().getItems("Supply crate").forEach(x -> x.interact("Open"));
+        Inventory.backpack().getItems("Supply crate").limit(9).forEach(x -> x.interact("Open"));
       }
 
       Bank.open();
-
-      //TODO this sleep is bad. When leaving the wintertodt area, there's a tick delay where the player cannot interact with anything
-      //So the bot will click the bank and nothing will happen, this sleep will still execute. I've made it smaller for now
-      sleepUntil(Bank::isOpen, 3);
       return true;
     }
 
-    String[] exceptions = Arrays.stream(WintertodtItem.values())
-        .map(WintertodtItem::getName)
-        .toArray(String[]::new);
+    BackpackLoadout loadout = new BackpackLoadout("todt");
+    for (WintertodtItem item : WintertodtItem.values()) {
+      if (item.isRequired(config)) {
+        loadout.add(new ItemEntryBuilder()
+            .key(item.getName())
+            .quantity(1)
+            .build());
+      }
+    }
 
-    Bank bank = Inventory.bank();
-    bank.depositAllExcept(iq -> iq.nameContains(exceptions).results());
-
-    for (WintertodtItem item : missing) {
-      bank.withdraw(item.getName(), 1);
+    //gross
+    if (getAxe(Inventory.equipment()) == null) {
+      Item bagged = getAxe(Inventory.backpack());
+      if (bagged != null) {
+        loadout.add(new ItemEntryBuilder()
+            .key(bagged.getName())
+            .quantity(1)
+            .build());
+      } else {
+        //TODO get best axe if this happens
+        Item banked = getAxe(Inventory.bank());
+        if (banked != null) {
+          loadout.add(new ItemEntryBuilder()
+              .key(banked.getName())
+              .quantity(1)
+              .build());
+        }
+      }
     }
 
     //We count actions rather than getFoodId from config because we may have leftover cake slices.
@@ -73,10 +84,23 @@ public class BankTask extends Task {
     }
 
     if (foodRequired > 0) {
-      bank.withdraw(config.getFoodId(), foodRequired);
+      ItemDefinition definition = Definitions.getItem(config.getFoodId());
+      if (definition != null) {
+        loadout.add(new ItemEntryBuilder()
+            .key(definition.getName())
+            .quantity(foodRequired)
+            .build());
+      }
+    }
+
+    if (!loadout.isBagged()) {
+      loadout.withdraw(Inventory.bank());
     }
 
     return true;
   }
 
+  private static Item getAxe(Inventory inv) {
+    return inv.query().nameContains(" axe").results().first();
+  }
 }

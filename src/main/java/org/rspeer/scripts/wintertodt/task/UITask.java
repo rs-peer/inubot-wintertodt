@@ -21,6 +21,6 @@ public class UITask extends Task {
 
   @Override
   public boolean execute() {
-    return domain.getConfig().getGang() == null;
+    return !domain.getConfig().isComplete();
   }
 }

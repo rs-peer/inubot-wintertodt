@@ -1,6 +1,7 @@
 package org.rspeer.scripts.wintertodt.domain.config;
 
 import com.google.inject.Singleton;
+import org.rspeer.commons.logging.Log;
 import org.rspeer.game.adapter.component.inventory.Inventory;
 import org.rspeer.game.script.meta.ScriptConfig;
 import org.rspeer.scripts.wintertodt.api.Items;
@@ -18,6 +19,8 @@ public class Config {
   private int foodId;
   private int foodAmount;
   private int minimumFoodAmount;
+
+  private boolean complete;
 
   /**
    * Initialize with default values
@@ -37,6 +40,8 @@ public class Config {
     foodId = config.getInteger(ConfigKey.FOOD_ID);
     foodAmount = config.getInteger(ConfigKey.FOOD_AMOUNT);
     minimumFoodAmount = config.getInteger(ConfigKey.MIN_FOOD_AMOUNT);
+
+    complete = true;
   }
 
   /**
@@ -78,10 +83,15 @@ public class Config {
   public boolean isReady() {
     for (WintertodtItem item : WintertodtItem.values()) {
       if (!item.isPresent(this)) {
+        Log.info("Missing " + item);
         return false;
       }
     }
 
     return Inventory.backpack().getCount(Items.FOOD) >= minimumFoodAmount;
+  }
+
+  public boolean isComplete() {
+    return complete;
   }
 }

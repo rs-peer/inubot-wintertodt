@@ -29,7 +29,7 @@ import java.util.function.IntSupplier;
 @ScriptMeta(
     name = "Wintertodt K1LLA",
     developer = "Doga, Tupac, Kanye",
-    version = 1.08,
+    version = 1.1,
     paint = PaintScheme.class,
     regions = -3
 )

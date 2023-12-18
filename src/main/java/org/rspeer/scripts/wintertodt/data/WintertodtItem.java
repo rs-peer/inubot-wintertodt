@@ -28,6 +28,10 @@ public enum WintertodtItem implements Function<ItemQuery, ItemQueryResults> {
     this(crate, name, false);
   }
 
+  public boolean isRequired(Config config) {
+    return crate.isRequired(config);
+  }
+
   public boolean isPresent(Config config) {
     if (!crate.isRequired(config)) {
       return true;
