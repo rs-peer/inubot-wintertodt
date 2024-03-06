@@ -2,7 +2,7 @@ package org.rspeer.scripts.wintertodt.domain.config;
 
 import com.google.inject.Singleton;
 import org.rspeer.commons.logging.Log;
-import org.rspeer.game.adapter.component.inventory.Inventory;
+import org.rspeer.game.component.Inventories;
 import org.rspeer.game.script.meta.ScriptConfig;
 import org.rspeer.scripts.wintertodt.api.Items;
 import org.rspeer.scripts.wintertodt.data.*;
@@ -88,7 +88,8 @@ public class Config {
       }
     }
 
-    return Inventory.backpack().getCount(Items.FOOD) >= minimumFoodAmount;
+    return !Inventories.backpack().contains(iq -> iq.nameContains(" crate").results())
+        && Inventories.backpack().getCount(Items.FOOD) >= getMinimumFoodAmount();
   }
 
   public boolean isComplete() {

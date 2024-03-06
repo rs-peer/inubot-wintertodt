@@ -1,10 +1,11 @@
 package org.rspeer.scripts.wintertodt.task.game.roots;
 
 import com.google.inject.Inject;
-import org.rspeer.commons.logging.Log;
-import org.rspeer.game.adapter.component.inventory.Inventory;
 import org.rspeer.game.adapter.scene.Player;
+import org.rspeer.game.component.Inventories;
 import org.rspeer.game.component.Item;
+import org.rspeer.game.component.tdi.Tab;
+import org.rspeer.game.component.tdi.Tabs;
 import org.rspeer.game.scene.Players;
 import org.rspeer.game.script.TaskDescriptor;
 import org.rspeer.scripts.wintertodt.api.Items;
@@ -44,7 +45,7 @@ public class FletchTask extends ActionTask {
       return false;
     }
 
-    Item root = Inventory.backpack().query()
+    Item root = Inventories.backpack().query()
         .nameContains(Constant.ROOT)
         .results()
         .first();
@@ -56,7 +57,11 @@ public class FletchTask extends ActionTask {
       return true;
     }
 
-    Inventory.backpack().use(
+    if (!Tabs.isOpen(Tab.INVENTORY)) {
+      Tabs.open(Tab.INVENTORY);
+    }
+
+    Inventories.backpack().use(
         iq -> iq.names(WintertodtItem.KNIFE.getName()).results().first(),
         root
     );
@@ -67,6 +72,6 @@ public class FletchTask extends ActionTask {
   private boolean isInsufficientStoredPoints() {
     int points = domain.getBoss().getPoints();
     int forNextThreshold = Constant.POINTS_THRESHOLD - (points % Constant.POINTS_THRESHOLD);
-    return points >= forNextThreshold - Items.getStoredRootPoints(Inventory.backpack());
+    return points >= forNextThreshold - Items.getStoredRootPoints(Inventories.backpack());
   }
 }

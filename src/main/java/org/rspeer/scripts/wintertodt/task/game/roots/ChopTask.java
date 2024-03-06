@@ -3,6 +3,7 @@ package org.rspeer.scripts.wintertodt.task.game.roots;
 import com.google.inject.Inject;
 import org.rspeer.game.adapter.scene.Player;
 import org.rspeer.game.adapter.scene.SceneObject;
+import org.rspeer.game.combat.Combat;
 import org.rspeer.game.scene.Players;
 import org.rspeer.game.script.TaskDescriptor;
 import org.rspeer.scripts.wintertodt.api.Province;
@@ -30,6 +31,18 @@ public class ChopTask extends ActionTask {
     }
 
     SceneObject root = Province.findRoots(domain.getState().getGang().getRoots());
-    return root != null && root.interact("Chop");
+    if (root == null) {
+      return false;
+    }
+
+    if (!Combat.isSpecialActive()
+        && Combat.getSpecialEnergy() == 100
+        && Combat.isSpecialBarPresent()
+        && root.distance(self) < 3) {
+      Combat.toggleSpecial(true);
+    }
+
+    root.interact("Chop");
+    return true;
   }
 }

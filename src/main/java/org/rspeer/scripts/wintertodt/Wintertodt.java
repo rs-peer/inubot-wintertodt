@@ -29,7 +29,7 @@ import java.util.function.IntSupplier;
 @ScriptMeta(
     name = "Wintertodt K1LLA",
     developer = "Doga, Tupac, Kanye",
-    version = 1.1,
+    version = 1.2,
     paint = PaintScheme.class,
     regions = -3
 )
@@ -94,6 +94,7 @@ public class Wintertodt extends TaskScript {
         RunTask.class,
         EnterTask.class,
         BankTask.class,
+        PoolTask.class,
         ExitTask.class,
         FoodTask.class,
         WaitingAreaTask.class,

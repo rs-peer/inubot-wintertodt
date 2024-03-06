@@ -1,7 +1,9 @@
 package org.rspeer.scripts.wintertodt.task.generic;
 
 import com.google.inject.Inject;
-import org.rspeer.game.adapter.component.inventory.Inventory;
+import org.rspeer.game.component.Inventories;
+import org.rspeer.game.component.tdi.Tab;
+import org.rspeer.game.component.tdi.Tabs;
 import org.rspeer.game.query.results.ItemQueryResults;
 import org.rspeer.game.script.Task;
 import org.rspeer.game.script.TaskDescriptor;
@@ -25,9 +27,13 @@ public class DropJunkTask extends Task {
       return false;
     }
 
-    ItemQueryResults junk = Items.JUNK.apply(Inventory.backpack().query());
+    ItemQueryResults junk = Items.JUNK.apply(Inventories.backpack().query());
     if (junk.isEmpty()) {
       return false;
+    }
+
+    if (!Tabs.isOpen(Tab.INVENTORY)) {
+      Tabs.open(Tab.INVENTORY);
     }
 
     junk.forEach(item -> item.interact("Drop"));

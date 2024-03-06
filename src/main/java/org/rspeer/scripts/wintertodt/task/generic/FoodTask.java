@@ -1,8 +1,10 @@
 package org.rspeer.scripts.wintertodt.task.generic;
 
 import com.google.inject.Inject;
-import org.rspeer.game.adapter.component.inventory.Inventory;
+import org.rspeer.game.component.Inventories;
 import org.rspeer.game.component.Item;
+import org.rspeer.game.component.tdi.Tab;
+import org.rspeer.game.component.tdi.Tabs;
 import org.rspeer.game.effect.Health;
 import org.rspeer.game.script.Task;
 import org.rspeer.game.script.TaskDescriptor;
@@ -25,9 +27,13 @@ public class FoodTask extends Task {
 
   @Override
   public boolean execute() {
-    Item food = Items.FOOD.apply(Inventory.backpack().query()).first();
+    Item food = Items.FOOD.apply(Inventories.backpack().query()).first();
     if (food == null || !shouldEat()) {
       return false;
+    }
+
+    if (!Tabs.isOpen(Tab.INVENTORY)) {
+      Tabs.open(Tab.INVENTORY);
     }
 
     food.interact(x -> true);

@@ -2,16 +2,16 @@ package org.rspeer.scripts.wintertodt.task.prepare;
 
 import com.google.inject.Inject;
 import org.rspeer.game.Definitions;
+import org.rspeer.game.House;
 import org.rspeer.game.adapter.component.inventory.Bank;
 import org.rspeer.game.adapter.component.inventory.Inventory;
 import org.rspeer.game.adapter.definition.ItemDefinition;
+import org.rspeer.game.component.Inventories;
 import org.rspeer.game.component.Item;
 import org.rspeer.game.config.item.entry.builder.ItemEntryBuilder;
 import org.rspeer.game.config.item.loadout.BackpackLoadout;
-import org.rspeer.game.effect.Health;
 import org.rspeer.game.script.Task;
 import org.rspeer.game.script.TaskDescriptor;
-import org.rspeer.scripts.wintertodt.api.Items;
 import org.rspeer.scripts.wintertodt.api.Province;
 import org.rspeer.scripts.wintertodt.data.WintertodtItem;
 import org.rspeer.scripts.wintertodt.domain.config.Config;
@@ -20,7 +20,7 @@ import org.rspeer.scripts.wintertodt.domain.config.Config;
     name = "Banking!",
     blocking = true,
     blockIfSleeping = true,
-    priority = 100
+    priority = 99
 )
 public class BankTask extends Task {
 
@@ -31,15 +31,23 @@ public class BankTask extends Task {
     this.config = config;
   }
 
+  private static Item getAxe(Inventory inv) {
+    return inv.query().nameContains(" axe").results().first();
+  }
+
   @Override
   public boolean execute() {
     if (Province.isInGame() || config.isReady()) {
       return false;
     }
 
+    if (House.isInside()) {
+      return false;
+    }
+
     if (!Bank.isOpen()) {
       if (config.isOpenCrates()) {
-        Inventory.backpack().getItems("Supply crate").limit(9).forEach(x -> x.interact("Open"));
+        Inventories.backpack().getItems("Supply crate").limit(9).forEach(x -> x.interact("Open"));
       }
 
       Bank.open();
@@ -57,8 +65,8 @@ public class BankTask extends Task {
     }
 
     //gross
-    if (getAxe(Inventory.equipment()) == null) {
-      Item bagged = getAxe(Inventory.backpack());
+    if (getAxe(Inventories.equipment()) == null) {
+      Item bagged = getAxe(Inventories.backpack());
       if (bagged != null) {
         loadout.add(new ItemEntryBuilder()
             .key(bagged.getName())
@@ -66,7 +74,7 @@ public class BankTask extends Task {
             .build());
       } else {
         //TODO get best axe if this happens
-        Item banked = getAxe(Inventory.bank());
+        Item banked = getAxe(Inventories.bank());
         if (banked != null) {
           loadout.add(new ItemEntryBuilder()
               .key(banked.getName())
@@ -76,31 +84,18 @@ public class BankTask extends Task {
       }
     }
 
-    //We count actions rather than getFoodId from config because we may have leftover cake slices.
-    int remainingFoodAmount = Inventory.backpack().getCount(Items.FOOD);
-    int foodRequired = config.getFoodAmount() - remainingFoodAmount;
-    if (Health.getPercent() < 35) {
-      foodRequired += 2;
-    }
-
-    if (foodRequired > 0) {
-      ItemDefinition definition = Definitions.getItem(config.getFoodId());
-      if (definition != null) {
-        loadout.add(new ItemEntryBuilder()
-            .key(definition.getName())
-            .quantity(foodRequired)
-            .build());
-      }
+    ItemDefinition definition = Definitions.getItem(config.getFoodId());
+    if (definition != null) {
+      loadout.add(new ItemEntryBuilder()
+          .key(definition.getName())
+          .quantity(config.getFoodAmount())
+          .build());
     }
 
     if (!loadout.isBagged()) {
-      loadout.withdraw(Inventory.bank());
+      loadout.withdraw(Inventories.bank());
     }
 
     return true;
-  }
-
-  private static Item getAxe(Inventory inv) {
-    return inv.query().nameContains(" axe").results().first();
   }
 }
