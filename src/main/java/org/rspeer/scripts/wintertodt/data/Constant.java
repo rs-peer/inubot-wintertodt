@@ -15,6 +15,18 @@ public interface Constant {
   int POINTS_THRESHOLD = 500;
 
   /**
+   * Axe IDS
+   */
+
+  int BRONZE_AXE = 1351;
+  int STEEL_AXE = 1353;
+  int MITHRIL_AXE = 1355;
+  int ADAMANT_AXE = 1357;
+  int RUNE_AXE = 1359;
+  int DRAGON_AXE = 6739;
+
+
+  /**
    * The ID of the wintertodt update client-sided runescript.
    * It is responsible for updating the wintertodt interface, which also displays the energy %.
    * <a href="https://github.com/Joshua-F/cs2-scripts/blob/master/scripts/%5Bclientscript,wint_update%5D.cs2">See more</a>

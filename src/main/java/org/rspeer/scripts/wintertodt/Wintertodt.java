@@ -25,6 +25,7 @@ import org.rspeer.scripts.wintertodt.task.generic.*;
 import org.rspeer.scripts.wintertodt.task.prepare.*;
 
 import java.util.function.IntSupplier;
+import java.util.function.Supplier;
 
 @ScriptMeta(
     name = "Wintertodt K1LLA",
@@ -46,6 +47,10 @@ public class Wintertodt extends TaskScript {
 
   @PaintBinding("Runtime")
   private final StopWatch runtime = StopWatch.start();
+
+  @PaintBinding("Last task")
+  private final Supplier<String> task = () -> manager.getLastTaskName();
+
 
   @PaintBinding(value = "Kills", rate = true)
   private final IntSupplier kills = () -> getDomain().getStatistics().getKills();

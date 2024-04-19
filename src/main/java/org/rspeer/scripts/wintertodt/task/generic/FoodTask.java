@@ -36,7 +36,7 @@ public class FoodTask extends Task {
       Tabs.open(Tab.INVENTORY);
     }
 
-    food.interact(x -> true);
+    food.interact("Eat", "Drink");
     tolerance = Constant.EAT_FOOD_AT.random();
     sleep(2);
     return true;

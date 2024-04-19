@@ -13,89 +13,93 @@ import org.rspeer.game.config.item.loadout.BackpackLoadout;
 import org.rspeer.game.script.Task;
 import org.rspeer.game.script.TaskDescriptor;
 import org.rspeer.scripts.wintertodt.api.Province;
+import org.rspeer.scripts.wintertodt.data.Axe;
 import org.rspeer.scripts.wintertodt.data.WintertodtItem;
 import org.rspeer.scripts.wintertodt.domain.config.Config;
 
+import java.util.Comparator;
+import java.util.function.Predicate;
+
 @TaskDescriptor(
-    name = "Banking!",
-    blocking = true,
-    blockIfSleeping = true,
-    priority = 99
+        name = "Banking!",
+        blocking = true,
+        blockIfSleeping = true,
+        priority = 99
 )
 public class BankTask extends Task {
 
-  private final Config config;
+    private final Config config;
 
-  @Inject
-  public BankTask(Config config) {
-    this.config = config;
-  }
-
-  private static Item getAxe(Inventory inv) {
-    return inv.query().nameContains(" axe").results().first();
-  }
-
-  @Override
-  public boolean execute() {
-    if (Province.isInGame() || config.isReady()) {
-      return false;
+    @Inject
+    public BankTask(Config config) {
+        this.config = config;
     }
 
-    if (House.isInside()) {
-      return false;
+    private Item getAxe(Inventory inv) {
+        return inv.query().ids(getUsable(x -> true).getId()).results().first();
     }
 
-    if (!Bank.isOpen()) {
-      if (config.isOpenCrates()) {
-        Inventories.backpack().getItems("Supply crate").limit(9).forEach(x -> x.interact("Open"));
-      }
-
-      Bank.open();
-      return true;
+    private Axe getUsable(Predicate<Axe> predicate) {
+        return Axe.getUsable()
+                .stream()
+                .sorted(Comparator.comparingInt(Axe::getLevel).reversed())
+                .filter(predicate)
+                .findFirst()
+                .orElse(null);
     }
 
-    BackpackLoadout loadout = new BackpackLoadout("todt");
-    for (WintertodtItem item : WintertodtItem.values()) {
-      if (item.isRequired(config)) {
-        loadout.add(new ItemEntryBuilder()
-            .key(item.getName())
-            .quantity(1)
-            .build());
-      }
-    }
-
-    //gross
-    if (getAxe(Inventories.equipment()) == null) {
-      Item bagged = getAxe(Inventories.backpack());
-      if (bagged != null) {
-        loadout.add(new ItemEntryBuilder()
-            .key(bagged.getName())
-            .quantity(1)
-            .build());
-      } else {
-        //TODO get best axe if this happens
-        Item banked = getAxe(Inventories.bank());
-        if (banked != null) {
-          loadout.add(new ItemEntryBuilder()
-              .key(banked.getName())
-              .quantity(1)
-              .build());
+    @Override
+    public boolean execute() {
+        if (Province.isInGame() || config.isReady()) {
+            return false;
         }
-      }
-    }
 
-    ItemDefinition definition = Definitions.getItem(config.getFoodId());
-    if (definition != null) {
-      loadout.add(new ItemEntryBuilder()
-          .key(definition.getName())
-          .quantity(config.getFoodAmount())
-          .build());
-    }
+        if (House.isInside()) {
+            return false;
+        }
 
-    if (!loadout.isBagged()) {
-      loadout.withdraw(Inventories.bank());
-    }
+        if (!Bank.isOpen()) {
+            if (config.isOpenCrates()) {
+                Inventories.backpack().getItems("Supply crate").limit(9).forEach(x -> x.interact("Open"));
+            }
 
-    return true;
-  }
+            Bank.open();
+            return true;
+        }
+
+        BackpackLoadout loadout = new BackpackLoadout("todt");
+        for (WintertodtItem item : WintertodtItem.values()) {
+            if (item.isRequired(config)) {
+                loadout.add(new ItemEntryBuilder()
+                        .key(item.getName())
+                        .quantity(1)
+                        .build());
+            }
+        }
+
+        Axe axe = getUsable(x -> true);
+        if (getAxe(Inventories.equipment()) == null) {
+            if (Inventories.bank().contains(x -> x.ids(axe.getId()).results()) && !Inventories.backpack().contains(x -> x.ids(axe.getId()).results())) {
+                loadout.add(new ItemEntryBuilder()
+                        .key(axe.getName())
+                        .quantity(1)
+                        .build());
+            }
+        }
+
+
+        ItemDefinition definition = Definitions.getItem(config.getFoodId());
+        if (definition != null) {
+            loadout.add(new ItemEntryBuilder()
+                    .key(definition.getName())
+                    .quantity(config.getFoodAmount())
+                    .build());
+        }
+
+        if (!loadout.isBagged()) {
+            loadout.withdraw(Inventories.bank());
+        }
+
+        return true;
+    }
 }
