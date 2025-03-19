@@ -18,9 +18,10 @@
     <dependencies>
         <dependency>
             <groupId>org.rspeer</groupId>
-            <artifactId>scripting</artifactId>
+            <artifactId>inubot</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>provided</scope>
+            <scope>system</scope>
+            <systemPath>${user.home}/inubot/inubot.jar</systemPath>
         </dependency>
     </dependencies>
 

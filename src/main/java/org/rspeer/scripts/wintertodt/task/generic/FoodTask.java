@@ -8,8 +8,7 @@ import org.rspeer.game.component.tdi.Tabs;
 import org.rspeer.game.effect.Health;
 import org.rspeer.game.script.Task;
 import org.rspeer.game.script.TaskDescriptor;
-import org.rspeer.scripts.wintertodt.api.Items;
-import org.rspeer.scripts.wintertodt.api.Province;
+import org.rspeer.scripts.wintertodt.api.*;
 import org.rspeer.scripts.wintertodt.data.Constant;
 import org.rspeer.scripts.wintertodt.domain.Domain;
 
@@ -44,9 +43,9 @@ public class FoodTask extends Task {
 
   private boolean shouldEat() {
     if (!Province.isInGame() || domain.getBoss().isRespawning()) {
-      return Health.getPercent() < 70;
+      return Warmth.getPercent() < 70;
     }
 
-    return Health.getPercent() <= tolerance;
+    return Warmth.getPercent() <= tolerance;
   }
 }
