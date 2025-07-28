@@ -15,6 +15,17 @@ mostly for educational purposes.
 * Very efficient script in general, but this comes with having strong game knowledge
 * Utilises client-sided runescripts to read data from the game as opposed to reading from interfaces
 
+## Notes
+
+This script was made very early on during Inubots lifetime so there are quite a lot of things 
+that can now be done better easily
+
+- Use of children tasks
+- Better use of loadouts (only quickly hacked them in to fix a bug)
+- Rejuvenation potions now exist, the script does not use these
+- Priorities are now deprecated, it's better to just add the tasks in the desired order as it's 
+  easier to follow
+
 ## Features
 
 * Will steal your password (probably)

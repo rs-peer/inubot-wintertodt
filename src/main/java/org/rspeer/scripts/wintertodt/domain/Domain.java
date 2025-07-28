@@ -3,6 +3,7 @@ package org.rspeer.scripts.wintertodt.domain;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import jag.script.RSScriptEvent;
+import org.rspeer.event.Service;
 import org.rspeer.event.Subscribe;
 import org.rspeer.game.event.*;
 import org.rspeer.game.scene.Players;
@@ -11,7 +12,7 @@ import org.rspeer.scripts.wintertodt.data.Constant;
 import org.rspeer.scripts.wintertodt.domain.config.Config;
 
 @Singleton
-public class Domain {
+public class Domain implements Service {
 
   private final Config config;
   private final Boss boss;

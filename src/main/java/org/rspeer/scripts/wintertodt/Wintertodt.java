@@ -2,14 +2,15 @@ package org.rspeer.scripts.wintertodt;
 
 import org.rspeer.commons.ArrayUtils;
 import org.rspeer.commons.StopWatch;
-import org.rspeer.game.Game;
+import org.rspeer.event.Service;
 import org.rspeer.game.component.tdi.Skill;
 import org.rspeer.game.script.Task;
 import org.rspeer.game.script.TaskScript;
 import org.rspeer.game.script.meta.ScriptMeta;
 import org.rspeer.game.script.meta.paint.PaintBinding;
-import org.rspeer.game.script.meta.paint.PaintScheme;
+import org.rspeer.game.script.meta.paint.schemes.InfernoPaintScheme;
 import org.rspeer.scripts.wintertodt.domain.Domain;
+import org.rspeer.scripts.wintertodt.domain.Statistics;
 import org.rspeer.scripts.wintertodt.task.UITask;
 import org.rspeer.scripts.wintertodt.task.game.WaitingAreaTask;
 import org.rspeer.scripts.wintertodt.task.game.brazier.*;
@@ -24,7 +25,7 @@ import java.util.function.IntSupplier;
     name = "Wintertodt K1LLA",
     developer = "Doga, Tupac, Kanye",
     version = 1.3,
-    paint = PaintScheme.class,
+    paint = InfernoPaintScheme.class,
     regions = -3
 )
 public class Wintertodt extends TaskScript {
@@ -33,10 +34,10 @@ public class Wintertodt extends TaskScript {
   private final StopWatch runtime = StopWatch.start();
 
   @PaintBinding(value = "Kills", rate = true)
-  private final IntSupplier kills = () -> getDomain().getStatistics().getKills();
+  private final IntSupplier kills = () -> injector.getInstance(Statistics.class).getKills();
 
   @PaintBinding(value = "Failed kills", rate = true)
-  private final IntSupplier fails = () -> getDomain().getStatistics().getFails();
+  private final IntSupplier fails = () -> injector.getInstance(Statistics.class).getFails();
 
   @PaintBinding("Experience")
   private final Skill[] skills = {
@@ -45,20 +46,6 @@ public class Wintertodt extends TaskScript {
       Skill.FLETCHING,
       Skill.CONSTRUCTION
   };
-
-  private Domain getDomain() {
-    return injector.getInstance(Domain.class);
-  }
-
-  @Override
-  public void initialize() {
-    Game.getEventDispatcher().subscribe(getDomain());
-  }
-
-  @Override
-  public void shutdown() {
-    Game.getEventDispatcher().unsubscribe(getDomain());
-  }
 
   @Override
   public Class<? extends Task>[] tasks() {
@@ -80,6 +67,13 @@ public class Wintertodt extends TaskScript {
         FletchTask.class,
         RelogTask.class,
         DropJunkTask.class
+    );
+  }
+
+  @Override
+  public Class<? extends Service>[] getServices() { //this makes it auto register and unregister the classes from the event registry on script start and end
+    return ArrayUtils.getTypeSafeArray(
+        Domain.class
     );
   }
 }

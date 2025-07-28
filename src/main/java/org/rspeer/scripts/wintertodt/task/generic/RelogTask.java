@@ -1,12 +1,12 @@
 package org.rspeer.scripts.wintertodt.task.generic;
 
 import com.google.inject.Inject;
+import org.rspeer.game.Game;
 import org.rspeer.game.adapter.component.inventory.Bank;
 import org.rspeer.game.component.Interfaces;
 import org.rspeer.game.script.Task;
 import org.rspeer.game.script.TaskDescriptor;
 import org.rspeer.scripts.wintertodt.api.Province;
-import org.rspeer.scripts.wintertodt.api.XGame;
 import org.rspeer.scripts.wintertodt.domain.Domain;
 
 @TaskDescriptor(
@@ -38,7 +38,7 @@ public class RelogTask extends Task {
       return true;
     }
 
-    if (XGame.logout()) {
+    if (Game.logout()) {
       domain.getState().setRelog(false);
       return true;
     }
