@@ -3,54 +3,37 @@ package org.rspeer.scripts.wintertodt.domain.config;
 import com.google.inject.Singleton;
 import org.rspeer.commons.logging.Log;
 import org.rspeer.game.component.Inventories;
-import org.rspeer.game.script.meta.ScriptConfig;
+import org.rspeer.game.script.model.ConfigModel;
+import org.rspeer.game.script.model.ui.schema.checkbox.CheckBoxComponent;
+import org.rspeer.game.script.model.ui.schema.selector.SelectorComponent;
+import org.rspeer.game.script.model.ui.schema.text.TextFieldComponent;
+import org.rspeer.game.script.model.ui.schema.text.TextInputType;
 import org.rspeer.scripts.wintertodt.api.Items;
 import org.rspeer.scripts.wintertodt.data.*;
 
 @Singleton
-public class Config {
+public class Config extends ConfigModel {
 
+  @CheckBoxComponent(name = "Fletch", key = "fletch")
   private boolean fletch;
+
+  @CheckBoxComponent(name = "Open crates", key = "open_crates")
   private boolean openCrates;
 
+  @SelectorComponent(name = "Side", key = "preferred_side", type = Gang.class)
   private Gang gang;
+
+  @SelectorComponent(name = "World", key = "preferred_world", type = GameWorld.class)
   private GameWorld world;
 
+  @TextFieldComponent(name = "Food ID", key = "food_id", inputType = TextInputType.NUMERIC)
   private int foodId;
+
+  @TextFieldComponent(name = "Food withdraw amount", key = "food_amount", inputType = TextInputType.NUMERIC)
   private int foodAmount;
+
+  @TextFieldComponent(name = "Minimum food for kill", key = "min_food_per_kill", inputType = TextInputType.NUMERIC)
   private int minimumFoodAmount;
-
-  private boolean complete;
-
-  /**
-   * Initialize with default values
-   */
-  public Config() {
-    //initialize(ConfigBuilder.ofDefaults());
-  }
-
-  /**
-   * ScriptConfigEvent calls this if used
-   */
-  public void initialize(ScriptConfig config) {
-    fletch = config.getBoolean(ConfigKey.FLETCH);
-    openCrates = config.getBoolean(ConfigKey.OPEN_CRATES);
-    gang = config.get(ConfigKey.GANG);
-    world = config.get(ConfigKey.WORLD);
-    foodId = config.getInteger(ConfigKey.FOOD_ID);
-    foodAmount = config.getInteger(ConfigKey.FOOD_AMOUNT);
-    minimumFoodAmount = config.getInteger(ConfigKey.MIN_FOOD_AMOUNT);
-
-    complete = true;
-  }
-
-  /**
-   * Initialize with a provided builder. Currently only used for the default values,
-   * but in the future I will use it for quickstart args
-   */
-  public void initialize(ConfigBuilder builder) {
-    initialize(builder.build());
-  }
 
   public boolean isFletch() {
     return fletch;
@@ -88,11 +71,6 @@ public class Config {
       }
     }
 
-    return !Inventories.backpack().contains(iq -> iq.nameContains(" crate").results())
-        && Inventories.backpack().getCount(Items.FOOD) >= getMinimumFoodAmount();
-  }
-
-  public boolean isComplete() {
-    return complete;
+    return !Inventories.backpack().contains(iq -> iq.nameContains(" crate").results()) && Inventories.backpack().getCount(Items.FOOD) >= getMinimumFoodAmount();
   }
 }

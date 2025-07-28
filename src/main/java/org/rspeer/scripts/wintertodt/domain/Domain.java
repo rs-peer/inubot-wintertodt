@@ -6,7 +6,6 @@ import jag.script.RSScriptEvent;
 import org.rspeer.event.Subscribe;
 import org.rspeer.game.event.*;
 import org.rspeer.game.scene.Players;
-import org.rspeer.game.script.event.ScriptConfigEvent;
 import org.rspeer.scripts.wintertodt.api.PyromancerEvent;
 import org.rspeer.scripts.wintertodt.data.Constant;
 import org.rspeer.scripts.wintertodt.domain.config.Config;
@@ -27,11 +26,6 @@ public class Domain {
     this.state = state;
     this.timers = timers;
     this.statistics = statistics;
-  }
-
-  @Subscribe
-  public void notify(ScriptConfigEvent event) {
-    config.initialize(event.getSource());
   }
 
   @Subscribe

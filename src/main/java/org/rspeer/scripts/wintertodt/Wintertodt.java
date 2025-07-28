@@ -9,13 +9,7 @@ import org.rspeer.game.script.TaskScript;
 import org.rspeer.game.script.meta.ScriptMeta;
 import org.rspeer.game.script.meta.paint.PaintBinding;
 import org.rspeer.game.script.meta.paint.PaintScheme;
-import org.rspeer.game.script.meta.ui.ScriptOption;
-import org.rspeer.game.script.meta.ui.ScriptUI;
-import org.rspeer.scripts.wintertodt.data.GameWorld;
-import org.rspeer.scripts.wintertodt.data.Gang;
 import org.rspeer.scripts.wintertodt.domain.Domain;
-import org.rspeer.scripts.wintertodt.domain.config.Config;
-import org.rspeer.scripts.wintertodt.domain.config.ConfigBuilder;
 import org.rspeer.scripts.wintertodt.task.UITask;
 import org.rspeer.scripts.wintertodt.task.game.WaitingAreaTask;
 import org.rspeer.scripts.wintertodt.task.game.brazier.*;
@@ -33,15 +27,6 @@ import java.util.function.IntSupplier;
     paint = PaintScheme.class,
     regions = -3
 )
-@ScriptUI({
-    @ScriptOption(name = "Fletch", type = boolean.class),
-    @ScriptOption(name = "Open crates", type = boolean.class),
-    @ScriptOption(name = "Side", type = Gang.class),
-    @ScriptOption(name = "World", type = GameWorld.class),
-    @ScriptOption(name = "Food id", type = int.class),
-    @ScriptOption(name = "Food amount", type = int.class),
-    @ScriptOption(name = "Minimum food amount", type = int.class)
-})
 public class Wintertodt extends TaskScript {
 
   @PaintBinding("Runtime")
@@ -63,16 +48,6 @@ public class Wintertodt extends TaskScript {
 
   private Domain getDomain() {
     return injector.getInstance(Domain.class);
-  }
-
-  @Override
-  public void processArgs(String args) {
-    if (args == null || args.isEmpty()) {
-      return;
-    }
-
-    Config config = getDomain().getConfig();
-    config.initialize(ConfigBuilder.ofArgs(args));
   }
 
   @Override
