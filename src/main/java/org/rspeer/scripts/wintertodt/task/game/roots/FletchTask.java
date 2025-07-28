@@ -4,8 +4,6 @@ import com.google.inject.Inject;
 import org.rspeer.game.adapter.scene.Player;
 import org.rspeer.game.component.Inventories;
 import org.rspeer.game.component.Item;
-import org.rspeer.game.component.tdi.Tab;
-import org.rspeer.game.component.tdi.Tabs;
 import org.rspeer.game.scene.Players;
 import org.rspeer.game.script.TaskDescriptor;
 import org.rspeer.scripts.wintertodt.api.Items;
@@ -55,10 +53,6 @@ public class FletchTask extends ActionTask {
 
     if (action.isActive(domain)) {
       return true;
-    }
-
-    if (!Tabs.isOpen(Tab.INVENTORY)) {
-      Tabs.open(Tab.INVENTORY);
     }
 
     Inventories.backpack().use(
