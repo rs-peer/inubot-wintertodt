@@ -11,6 +11,7 @@ import org.rspeer.game.script.meta.paint.PaintBinding;
 import org.rspeer.game.script.meta.paint.schemes.InfernoPaintScheme;
 import org.rspeer.scripts.wintertodt.domain.Domain;
 import org.rspeer.scripts.wintertodt.domain.Statistics;
+import org.rspeer.scripts.wintertodt.domain.config.Config;
 import org.rspeer.scripts.wintertodt.task.UITask;
 import org.rspeer.scripts.wintertodt.task.game.WaitingAreaTask;
 import org.rspeer.scripts.wintertodt.task.game.brazier.*;
@@ -23,10 +24,10 @@ import java.util.function.IntSupplier;
 
 @ScriptMeta(
     name = "Wintertodt K1LLA",
-    developer = "Doga, Tupac, Kanye",
-    version = 1.3,
+    developer = "Doga",
+    version = 1.4,
     paint = InfernoPaintScheme.class,
-    regions = -3
+    model = Config.class
 )
 public class Wintertodt extends TaskScript {
 
