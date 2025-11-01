@@ -15,6 +15,9 @@ mostly for educational purposes.
 * Very efficient script in general, but this comes with having strong game knowledge
 * Utilises client-sided runescripts to read data from the game as opposed to reading from interfaces
 
+## DeepWiki
+[Available here](https://deepwiki.com/rs-peer/inubot-wintertodt/)
+
 ## Notes
 
 This script was made very early on during Inubots lifetime so there are quite a lot of things 
